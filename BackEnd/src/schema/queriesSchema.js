@@ -13,6 +13,10 @@ const customerQuery=require('../Model/customer/queriesModels')
 const customeraccountrelationshipQuery=require('../Model/customeraccountrelationship/queriesModels')
 const otapcommandQuery=require('../Model/otapcommand/queriesModels')
 const otherotapcommandQuery=require('../Model/otherotapcommand/queriesModels')
+
+
+
+
 module.exports = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
@@ -36,10 +40,14 @@ module.exports = new GraphQLObjectType({
         // Customers:customerQuery.Customers,
         customeraccountrelationshipQuery:customeraccountrelationshipQuery.customeraccountrelationship,
         // accountrelationship:customeraccountrelationshipQuery.accountrelationship,
-        otapcommand:otapcommandQuery.otapcommand,
-        // commandotap:otapcommandQuery.commandotap,
+        OtapCommand:otapcommandQuery.OtapCommand,
+        // CommandOtap:otapcommandQuery.CommandOtap,
+
+
+
         otherotapcommand:otherotapcommandQuery.otherotapcommand,
-        // otapcommand:otherotapcommandQuery.otapcommand
+        otapcommand:otherotapcommandQuery.otapcommand,
+        
         
 
 

@@ -1,3 +1,4 @@
+// const dbqueries=require('./db')
 const dbqueries=require('../../config/dbqueries')
 const mysqlwrapper=require('../../config/mysqlwrapper')
 
@@ -9,8 +10,8 @@ class Otapcommand extends dbqueries {
     }
 
      // Returns a device by its ID
-    static async getByID(_, {id}) {
-        return await this.find(id)
+    static async getByID(_, {DeviceID}) {
+        return await this.find(DeviceID)
     }
 
     /**

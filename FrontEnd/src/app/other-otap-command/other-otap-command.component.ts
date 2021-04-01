@@ -16,6 +16,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import { SelectionModel } from '@angular/cdk/collections';
 import {UpgradecommandService} from './service/upgradecommand.service'
 import { MatTableExporterDirective } from 'mat-table-exporter';
+import * as XLSX from 'xlsx';
 
 export type otherotapcommand ={
   DeviceID:Number;
@@ -36,14 +37,14 @@ export type DataQuery ={
 }
 
 
-export type otapcommand = {
+export type OtapCommand = {
   DeviceID:String;
   PacketID:Number;
   Name:String;
   Message:String
 }
 export type DataQuery1 ={
-  otapcommand:otapcommand[]
+  OtapCommand:OtapCommand[]
 }
 
 const UPVOTE_POST = gql`
@@ -73,9 +74,15 @@ export class OtherOTAPCommandComponent implements OnInit , AfterViewInit , After
   loadingFlag = true;
   temp = null
   messages:object =[];
+  emp1:object =[];
+  arrayBuffer:any;
+  filelist: any;
+  deviceArr = [];
+  loadingFlag1 = true;
   //displayedColumns: string[] = ['select','id','name','cn','np','mn1','mn2','ssd','sed','vtn','model','ccv','cjv'];
   displayedColumns: string[]=["select","DeviceID","DeviceType","Customer","NetworkProvider","MobileNo","Model","VehicleTypeName","CurrentCVersion","CurrentJavaVersion","Ignition"]
   dataSource : MatTableDataSource<any>
+  dataSource1 : MatTableDataSource<any>
   selection = new SelectionModel(false, []);
 
 
@@ -154,7 +161,7 @@ export class OtherOTAPCommandComponent implements OnInit , AfterViewInit , After
     const source1$ = this.apollo.query<DataQuery1>({
       query: gql`
       {
-        otapcommand{
+        OtapCommand{
           Message
           Name
           DeviceID
@@ -164,11 +171,77 @@ export class OtherOTAPCommandComponent implements OnInit , AfterViewInit , After
       
     }).pipe(shareReplay(1))
 
-source1$.pipe(map(result => result.data && result.data.otapcommand)).subscribe((data) =>   
+source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((data) =>   
  this.messages = data
   );
 
+
+//   var val = ['n20','n21']
+// for(let entry of val){
+//   this.getCategory(entry)
+// }
+
+
+  // const source2$ = this.apollo.query<DataQuery>({
+  //   query: gql`
+  //     query otapcommand($DeviceID:String){
+  //       otapcommand(DeviceID: $DeviceID){
+  //         DeviceID,
+  //         DeviceID
+  //         DeviceType
+  //         Customer
+  //         NetworkProvider
+  //         MobileNo
+  //         Model
+  //         VehicleTypeName
+  //         CurrentCVersion
+  //         CurrentJavaVersion
+  //         Ignition
+  //       }
+  //     }  
+  //   `,
+  //   variables:{
+  //     DeviceID: "n20"
+  //   }
+    
+  // }).pipe(shareReplay(1))
   
+  // source2$.pipe(map(result => result.data && result.data.otherotapcommand)).subscribe((data) => 
+  // this.emp1 = data);
+  
+  
+  
+    }
+
+
+    public getCategory = (id) => {
+
+      this.apollo.query({
+        query: gql`
+        query otapcommand($DeviceID:String){
+          otapcommand(DeviceID: $DeviceID){
+            DeviceID,
+            DeviceID
+            DeviceType
+            Customer
+            NetworkProvider
+            MobileNo
+            Model
+            VehicleTypeName
+            CurrentCVersion
+            CurrentJavaVersion
+            Ignition
+          }
+        }  
+      `,
+      variables:{
+        DeviceID: id
+      }
+      }).subscribe(result => {
+        this.dataSource1 = new MatTableDataSource(result.data['otapcommand'])
+        this.dataSource1  ? this.loadingFlag1 = false : this.loadingFlag1 = true;
+        // this.emp1 = result.data['otapcommand']
+      })
     }
   
   
@@ -176,7 +249,11 @@ source1$.pipe(map(result => result.data && result.data.otapcommand)).subscribe((
       const filterValue = (event.target as HTMLInputElement).value;
       this.dataSource.filter = filterValue.trim().toLowerCase();
     }
-  
+ 
+    applyFilter1(event: Event) {
+      const filterValue = (event.target as HTMLInputElement).value;
+      this.dataSource1.filter = filterValue.trim().toLowerCase();
+    }
     ngAfterContentChecked()	{
       //setTimeout(() => this.dataSource.paginator = this.paginator);
     }
@@ -215,6 +292,36 @@ source1$.pipe(map(result => result.data && result.data.otapcommand)).subscribe((
           }
         }
       }
+
+
+      addfile(files: FileList) {
+        this.file = files.item(0);
+        console.log(this.file.name)    
+    let fileReader = new FileReader();    
+    fileReader.readAsArrayBuffer(this.file);     
+    fileReader.onload = (e) => {    
+        this.arrayBuffer = fileReader.result;    
+        var data = new Uint8Array(this.arrayBuffer);    
+        var arr = new Array();    
+        for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);    
+        var bstr = arr.join("");    
+        var workbook = XLSX.read(bstr, {type:"binary"});    
+        var first_sheet_name = workbook.SheetNames[0];    
+        var worksheet = workbook.Sheets[first_sheet_name];    
+        this.filelist = XLSX.utils.sheet_to_json(worksheet,{raw:true});    
+        this.parseFile(this.filelist);
+    }    
+  }
+
+  parseFile(fileData) {
+    fileData.map(data=> {
+      console.log(data)
+      this.deviceArr.push(data['Device ID'])
+     
+    })
+
+    this.getCategory('n20')
+  }
       
       /** The label for the checkbox on the passed row */
       checkboxLabel(row?: any): string {

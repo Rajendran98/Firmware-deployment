@@ -43,6 +43,8 @@ export type DataQuery ={
 export class AppComponent implements OnInit {
   public headerFlag = false;
   emp:object =[];
+  emp1:object =[];
+  emp2:object =[];
   title = 'osg';
   public firmwares: Firmware;
   visible = true;
@@ -80,11 +82,25 @@ query$: Observable<devicetype[]>;
       }).pipe(shareReplay(1))
 
  source$.pipe(map(result => result.data && result.data.devicetype)).subscribe((data) => this.emp =data);
-    //   this.query$.forEach( function (value){
-    //  console.log(value)
+   
       
-    //   })
-      
+
+//  const source1$ = this.apollo.query<DataQuery>({
+//   query: gql`
+//   query otapcommand($DeviceID:String!){
+//     otapcommand(DeviceID: $DeviceID){
+//      DeviceID
+//     }
+//   }  
+//   `,
+//   variables:{
+//     DeviceID: "n20"
+//   }
+  
+// }).pipe(shareReplay(1))
+
+// source1$.pipe(map(result => result.data && result.data.devicetype)).subscribe((data) => this.emp1 =data);
+
 
   
   }
@@ -105,22 +121,9 @@ query$: Observable<devicetype[]>;
     }
 
     dashboard(){
-    //   const options = { 
-    //     filename: 'Firmware Report',
-    //     fieldSeparator: ',',
-    //     quoteStrings: '"',
-    //     decimalSeparator: '.',
-    //     showLabels: true, 
-    //     showTitle: false,
-    //     useTextFile: false,
-    //     useBom: true,
-    //     useKeysAsHeaders: true,
-       
-    //   };
-     
-    // const csvExporter = new ExportToCsv(options);
-     
-    // csvExporter.generateCsv(this.emp);
+      // this.emp2 = this.emp1
+      // console.log(this.emp2)
+      
     }
     
     firmware(){

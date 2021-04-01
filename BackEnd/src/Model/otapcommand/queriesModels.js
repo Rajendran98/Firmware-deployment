@@ -6,11 +6,11 @@ const { GraphQLList,
 } = require('graphql')
 const type = require('./type')
 // const mutation = require('./mutations')
-const Otapcommand = require('./otapcommandModels')
+const Otapcommand = require('./otapcommandModels.js')
 
 // Defines the queries
 module.exports = {
-    otapcommand: {
+    OtapCommand: {
     type: new GraphQLList(type),
     PacketID:{
         type:GraphQLInt
@@ -26,7 +26,7 @@ module.exports = {
     // },
     resolve: Otapcommand.findMatching.bind(Otapcommand)
 },
-commandotap: {
+CommandOtap: {
     type,
     args: {
         ID: {

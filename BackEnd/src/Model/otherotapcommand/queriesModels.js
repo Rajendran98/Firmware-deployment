@@ -36,12 +36,12 @@ module.exports = {
     resolve: Otherotapcommand.findMatching.bind(Otherotapcommand)
 },
 otapcommand: {
-    type,
+    type:new GraphQLList(type),
     args: {
-        DeviceType: {
+        DeviceID: {
             type: GraphQLString
         }
     },
-    resolve: Otherotapcommand.getByDeviceType.bind(Otherotapcommand)
+    resolve: Otherotapcommand.findMatching.bind(Otherotapcommand)
 }
 }

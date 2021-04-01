@@ -9,8 +9,8 @@ class Otherotapcommand extends dbqueries {
     }
 
      // Returns a device by its ID
-    static async getByDeviceType(_, {DeviceType}) {
-        return await this.find(DeviceType)
+    static async getByDeviceID(_, {DeviceID}) {
+        return await this.find(DeviceID)
     }
 
     /**
