@@ -295,6 +295,8 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
 
 
       addfile(files: FileList) {
+        
+    this.getCategory('n20')
         this.file = files.item(0);
         console.log(this.file.name)    
     let fileReader = new FileReader();    
