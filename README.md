@@ -29,7 +29,7 @@ Firmware -> Backend
 
 npm install
 
-Firmware -> Backend -> src 
+Firmware -> Backend 
 
-node server.js
+npm run dev
 
