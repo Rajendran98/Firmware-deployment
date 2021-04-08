@@ -45,7 +45,7 @@ export class UploadCFirmwareComponent implements OnInit {
   edit:EditFirmwareFileSize;
   ID  
   vname
-  Name
+  Named
   FileSize;
   
   hide = true;
@@ -97,7 +97,7 @@ source1$.pipe(map(result => result.data && result.data.detailC)).subscribe((data
 
      
       if(key == "Name"){
-        this.Name = value
+        this.Named = value
       }
       if(key == "ID"){
        this.ID = Number(value)
@@ -144,7 +144,7 @@ source1$.pipe(map(result => result.data && result.data.detailC)).subscribe((data
         variables: 
         {
           ID: this.ID,
-          Name: this.Name,
+          Name: this.Named,
           FileSize: this.FileSize
         }
       }).subscribe(({data }) => {

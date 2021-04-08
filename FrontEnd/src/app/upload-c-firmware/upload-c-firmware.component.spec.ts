@@ -3,10 +3,20 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import {HttpClientModule} from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { FormsModule, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { UploadCFirmwareComponent } from './upload-c-firmware.component';
 import { Router } from '@angular/router';
 import { UploadCFirmwareService } from './service/upload-c-firmware.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule, NG_VALUE_ACCESSOR, DefaultValueAccessor, ControlValueAccessor } from '@angular/forms';
+
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {
+  ApolloTestingModule,
+  ApolloTestingController,
+} from 'apollo-angular/testing';
+
 
 describe('UploadCFirmwareComponent', () => {
   let component: UploadCFirmwareComponent;
@@ -17,7 +27,8 @@ describe('UploadCFirmwareComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports:[RouterTestingModule,  HttpClientTestingModule, MatSnackBarModule, FormsModule],
+      imports:[RouterTestingModule,  HttpClientTestingModule, MatSnackBarModule,
+        FormsModule,ApolloTestingModule],
       declarations: [ UploadCFirmwareComponent ]
     })
     .compileComponents();
