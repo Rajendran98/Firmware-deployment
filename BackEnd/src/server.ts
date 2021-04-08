@@ -1,7 +1,12 @@
+
+console.log("server file");
+
+
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 var Routes=require('./routes/app')
+
 class App {
     expressApp: any;
     constructor() {

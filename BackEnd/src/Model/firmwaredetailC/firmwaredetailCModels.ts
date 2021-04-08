@@ -1,4 +1,4 @@
-const dbqueries=require('../../config/dbqueries');
+const dbqueries=require('../../config/dbqueries')
 const mysqlwrapper=require('../../config/mysqlwrapper')
 
 export class DetailC extends dbqueries {
@@ -7,14 +7,15 @@ export class DetailC extends dbqueries {
     static findByFields: any
     static insert: any
     static update: any
+
     //  Overrides TABLE_NAME with this class' backing table at MySQL
     static get TABLE_NAME() {
         return 'firmwaredetailc'
     }
 
      // Returns a device by its ID
-    static async getByID(_: any, {id}: { id: any; }) {
-        return await this.find(id)
+    static async getByID(_: any, {ID}: { ID: any }) {
+        return await this.find(ID)
     }
 
     /**
@@ -42,7 +43,7 @@ export class DetailC extends dbqueries {
                 }
             })
 
-            return this.getByID(_, {id: _result.insertId})
+            return this.getByID(_, {ID: _result.insertId})
         } finally {
             // Releases the connection
             if (connection != null) connection.release()
@@ -52,19 +53,19 @@ export class DetailC extends dbqueries {
     /**
      * Updates a device
      */
-    static async updateEntry(_: any, {id, type, price}: any) {
+    static async updateEntry(_: any, {ID, Name, FileSize}: any) {
         const connection = await mysqlwrapper.getConnectionFromPool()
         try {
 
             await this.update(connection, {
-                id,
+                ID,
                 data: {
-                    type,
-                    price
+                    Name,
+                    FileSize
                 }
             })
 
-            return this.getByID(_, {id})
+            return this.getByID(_, {ID})
         } finally {
             // Releases the connection
             if (connection != null) connection.release()
@@ -72,4 +73,4 @@ export class DetailC extends dbqueries {
     }
 }
 
-module.exports = DetailC
+module.exports = DetailC;

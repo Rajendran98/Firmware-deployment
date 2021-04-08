@@ -11,7 +11,6 @@ export type devicemaster ={
   DeviceID:Number;
 }
 
-
 export type DataQuery ={
   devicemaster:devicemaster[]
 }

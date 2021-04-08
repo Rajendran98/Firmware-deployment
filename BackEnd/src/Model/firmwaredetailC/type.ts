@@ -12,7 +12,7 @@ import {
 module.exports = new GraphQLObjectType({
     name: 'firmwaredetailc',
     description: 'detailC',
-    fields: {
+    fields:()=>({
         ID: {
             type: new GraphQLNonNull(GraphQLID)
         },
@@ -50,5 +50,5 @@ module.exports = new GraphQLObjectType({
             type: new GraphQLNonNull(GraphQLString)
         }
 
-    }
+    })
 })

@@ -38,5 +38,6 @@ firmwaredetailC: {
         }
     },
     resolve: DetailC.getByID.bind(DetailC)
-}
+},
+
 }

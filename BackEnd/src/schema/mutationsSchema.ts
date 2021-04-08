@@ -3,10 +3,14 @@ import { GraphQLObjectType } from 'graphql'
 // const otapcommandMutation=require('../Model/otapcommand/mutationsModels')
 const otapcommandMutation=require('../Model/otapcommand/mutationModels')
 
+const firmwaredetailcMutation=require('../Model/firmwaredetailC/mutationModels')
 module.exports= new GraphQLObjectType({
     name:'RootMutationsType',
     fields:{
         addotapcommand:otapcommandMutation.addotapcommand,
-        updateotapcommand:otapcommandMutation.updateotapcommand
+        updateotapcommand:otapcommandMutation.updateotapcommand,
+        addDetailC:firmwaredetailcMutation.addDetailC,
+        updateDetailC:firmwaredetailcMutation.updateDetailC
+        
     }
 }) 

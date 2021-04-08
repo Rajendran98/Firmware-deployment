@@ -69,7 +69,7 @@
                             <mat-icon>save</mat-icon>
                             SAVE
                         </button>
-                        <button mat-raised-button type="reset" (click)="uploadCForm.reset()" class="two">
+                        <button mat-raised-button type="reset" (click)="uploadFormreset(uploadCForm)" class="two">
                             <mat-icon>replay
                             </mat-icon>
                             RESET
@@ -88,15 +88,22 @@
                     <form #editForm="ngForm" >
                         <div class="col-sm-12"> 
                             <mat-form-field style="width: 100%;"  appearance="standard">
-                               <mat-label >VERSION NAME</mat-label>
-                                <input matInput  name="vname" placeholder="VERSION NAME" ngModel maxlength="25" [(ngModel)]="edit.versionName"  required >
-                
+                                <mat-label>Version Name</mat-label>
+                                <mat-select name="Name" placeholder="Version Name" ngModel [(ngModel)]="Name" required>
+                                  
+            
+                                    <mat-option *ngFor="let message of messages" (click)="listed(message)"  [value]="message.Name" >
+                                      {{message.Name}}
+                                    </mat-option>
+                                  
+                                
+                                </mat-select>
                             </mat-form-field>
                         </div>
                         <div class="col-sm-12">
                             <mat-form-field style="width: 100%;"  appearance="standard">
                                 <mat-label >FILE SIZE</mat-label>
-                                <input matInput  name="fSize" placeholder="FILE SIZE" ngModel maxlength="25" [(ngModel)]="edit.fileSize"  required>
+                                <input matInput type="number" name="FileSize" placeholder="FILE SIZE" ngModel maxlength="25" [(ngModel)]="FileSize"  required>
                 
                             </mat-form-field>
                         </div>
@@ -104,7 +111,7 @@
                             <mat-icon>save</mat-icon>
                             SAVE
                         </button>
-                        <button mat-raised-button type="reset" (click)="reset1(editForm)" class="two">
+                        <button mat-raised-button type="reset" (click)="editFormreset(editForm)" class="two">
                             <mat-icon>replay
                             </mat-icon>
                             RESET

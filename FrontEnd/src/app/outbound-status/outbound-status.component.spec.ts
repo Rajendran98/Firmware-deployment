@@ -1,6 +1,11 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed ,inject } from '@angular/core/testing';
 
 import { OutboundStatusComponent } from './outbound-status.component';
+
+import {
+  HttpClientTestingModule,
+  HttpTestingController
+} from '@angular/common/http/testing';
 
 describe('OutboundStatusComponent', () => {
   let component: OutboundStatusComponent;
@@ -8,6 +13,7 @@ describe('OutboundStatusComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [  HttpClientTestingModule],
       declarations: [ OutboundStatusComponent ]
     })
     .compileComponents();
@@ -19,7 +25,7 @@ describe('OutboundStatusComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create', inject([HttpTestingController], () => {
     expect(component).toBeTruthy();
-  });
+  }));
 });

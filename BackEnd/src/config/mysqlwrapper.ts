@@ -11,7 +11,7 @@ module.exports = class mysqlwrapper {
                 }
 
                 //Runs the query
-                connection.query(query, params, (err: any, rows: unknown) => {
+                connection.query(query, params, (err: any, rows:any) => {
                     connection.release()
                     if (err) {
                         return fail(err)
@@ -36,7 +36,7 @@ module.exports = class mysqlwrapper {
         
         return new Promise((succeed, fail) => {
 
-            connection.query(query, params, (err: any, rows: unknown) => {
+            connection.query(query, params, (err: any, rows: any) => {
                 
                 //If an error was passed running the query, fails the promise sending it to the caller
                 if (err) {
@@ -112,7 +112,7 @@ module.exports = class mysqlwrapper {
     static getConnectionFromPool() {
         return new Promise((succeed, fail) => {
 
-            mysqlconnect.pool.getConnection((err: any, connection: unknown) => {
+            mysqlconnect.pool.getConnection((err: any, connection:any) => {
 
                 //Fails the promise if a connection cannot be retrieved
                 if (err) {

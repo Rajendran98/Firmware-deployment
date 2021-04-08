@@ -39,24 +39,12 @@ export class UploadIotFirmwareComponent implements OnInit {
   }
 
   
-  public onEdit(accountForm: NgForm)
-  {
-   
-    if(accountForm.valid)
-    {
-      console.log(accountForm.value)
-     console.log("validataes")
-    }
-    else
-    {
-      return;
-    }
-
-  }
+ 
 
   public reset(accountForm: NgForm){
 
     accountForm.resetForm();
+   
   }
 
   dash(){

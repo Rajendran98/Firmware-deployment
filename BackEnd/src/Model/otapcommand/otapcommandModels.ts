@@ -54,19 +54,19 @@ export class Otapcommand extends dbqueries {
     /**
      * Updates a device
      */
-    static async updateEntry(_: any, {id, type, price}: any) {
+    static async updateEntry(_: any, {DeviceID, type, price}: any) {
         const connection = await mysqlwrapper.getConnectionFromPool()
         try {
 
             await this.update(connection, {
-                id,
+                DeviceID,
                 data: {
                     type,
                     price
                 }
             })
 
-            // return this.getByID(_, {DeviceID})
+            return this.getByID(_, {DeviceID})
         } finally {
             // Releases the connection
             if (connection != null) connection.release()

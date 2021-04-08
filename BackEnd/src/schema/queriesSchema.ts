@@ -1,5 +1,6 @@
 import { GraphQLObjectType } from 'graphql'
 
+console.log("schema queries file");
 
 const deviceQueres=require('../Model/devicetype/queriesModels')
 const DevicepacketsummaryQuery=require('../Model/fdadevicepacketsummary/queriesModels')
@@ -26,6 +27,7 @@ module.exports = new GraphQLObjectType({
         // summarypacket:DevicepacketsummaryQuery.packetsummary,
         detailC:firmwaredetailcQuery.detailC,
         // firmwaredetailC:firmwaredetailcQuery.firmwaredetailC,
+        // Firmwaredetailc:firmwaredetailcQuery.Firmwaredetailc,
         detailJava:firmwaredetailjavaQuery.detailJava,
         // firmwaredetailjava:firmwaredetailjavaQuery.firmwaredetailjava,
         deviceInfo:devicefirmwareinfoQuery.deviceInfo,
