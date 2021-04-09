@@ -48,6 +48,12 @@ module.exports = new GraphQLObjectType({
         },
         ReleaseNotes:{
             type: new GraphQLNonNull(GraphQLString)
+        },
+        IsFirmware:{
+            type:new GraphQLNonNull(GraphQLBoolean)
+        },
+        isSNM476:{
+            type:new GraphQLNonNull(GraphQLBoolean)
         }
 
     })

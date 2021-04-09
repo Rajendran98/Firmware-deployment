@@ -21,9 +21,12 @@ module.exports = {
             Name: {
                 type: new GraphQLNonNull(GraphQLString)
             },
-            FileSize:{
-                type: new GraphQLNonNull(GraphQLInt)
-            },
+            // FileSize:{
+            //     type: new GraphQLNonNull(GraphQLInt)
+            // },
+            isfirmware:{
+                type:new GraphQLNonNull(GraphQLBoolean)
+            }
         },
         resolve: DetailC.createEntry.bind(DetailC)
     },

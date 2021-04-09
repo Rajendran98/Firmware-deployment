@@ -38,15 +38,15 @@
         </div> -->
         <button mat-raised-button (click)="fileInput.click()" class="one">
             <mat-icon class="con1">file_upload</mat-icon>
-            Device Upload
+            File Upload
         </button>
         <input #fileInput  type="file" name="files"  accept=".hex" id="myfile" (change)="postMethod($event.target.files)" style="display:none;" />
        
 
-        <button mat-raised-button (click)="onClicking()" class="one">
+        <!-- <button mat-raised-button (click)="onClicking()" class="one">
             <mat-icon>save</mat-icon>
             SUBMIT
-        </button>
+        </button> -->
         <!-- <button mat-raised-button type="reset"  (click)="reset(accountForm)" class="two">
             <mat-icon>replay
             </mat-icon>

@@ -1,5 +1,13 @@
 {
 
+  "/api5": {
+    "target": "https://identity.trimble.com/token?grant_type=client_credentials",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+    "^/api5": ""
+    }
+    },
   "/api4": {
     "target": "https://api.trimble.com/t/trimble.com/oem/2.0/fwmanagerapi/file/upload",
     "secure": true,

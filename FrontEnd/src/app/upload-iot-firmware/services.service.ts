@@ -13,7 +13,7 @@ export class ServicesService {
 
 
   uploadFirmware(data) {
-    return this.http.post<any>(`${environment._firmwareFileUpload}`,data).pipe(map(user => {
+    return this.http.post(`${environment._firmwareFileUpload}`,data ,{responseType: 'text'}).pipe(map(user => {
       console.log(user);
       return user;
   }));

@@ -16,6 +16,7 @@
 }
 .mat-card{
     width: 600px;
+    height: 200px;
     margin-left: 30px;
 }
 
@@ -24,7 +25,7 @@
     background-color: #005F9E;
     color: white;
     margin-left: 10px;
-    margin-top: 20px;
+    margin-top: 100px;
 }
 .two{
     background-color: #005F9E;

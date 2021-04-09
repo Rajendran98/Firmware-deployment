@@ -6,6 +6,7 @@ import { UploadIotFirmware} from '../model/model'
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { ServicesService } from './services.service'
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-upload-iot-firmware',
@@ -17,7 +18,7 @@ export class UploadIotFirmwareComponent implements OnInit {
  uploadIot:UploadIotFirmware;
  public file : File;
  fileToUpload: File;
-  constructor(private router:Router, private http: HttpClient,private ServicesService: ServicesService ) { }
+  constructor(private router:Router, private http: HttpClient,private ServicesService: ServicesService,private _snackBar: MatSnackBar  ) { }
 
   ngOnInit(): void {
     this.uploadIot={
@@ -39,10 +40,14 @@ export class UploadIotFirmwareComponent implements OnInit {
        console.log(formData)
       this.ServicesService.uploadFirmware(formData).pipe().subscribe(data =>
       {
-        debugger
+        this._snackBar.open("File Uploaded Successfully","",{duration: 2000});
         console.log(data)
        
-      })
+      },
+      error =>{
+        console.log(error)
+      }
+      )
     // this.http.post(`${environment._firmwareFileUpload}`,formData).pipe().subscribe((val)=>{
     //   console.log(val)
     // })

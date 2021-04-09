@@ -18,6 +18,9 @@ const otherotapcommandQuery=require('../Model/otherotapcommand/queriesModels')
 
 
 
+
+// const detailcandjavaquery=require('../Model/firmwaredetailC/bothtypes')
+
 module.exports = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
@@ -26,10 +29,14 @@ module.exports = new GraphQLObjectType({
         devicepacket:DevicepacketsummaryQuery.devicepacket,
         // summarypacket:DevicepacketsummaryQuery.packetsummary,
         detailC:firmwaredetailcQuery.detailC,
-        // firmwaredetailC:firmwaredetailcQuery.firmwaredetailC,
-        // Firmwaredetailc:firmwaredetailcQuery.Firmwaredetailc,
+        // detailC:firmwaredetailcQuery.detailC.Javadetail,
+        firmwaredetailC:firmwaredetailcQuery.firmwaredetailC,
+        Javadetail:firmwaredetailcQuery.Javadetail,
+
+
         detailJava:firmwaredetailjavaQuery.detailJava,
         // firmwaredetailjava:firmwaredetailjavaQuery.firmwaredetailjava,
+        // Javadetail:firmwaredetailjavaQuery.Javadetail,
         deviceInfo:devicefirmwareinfoQuery.deviceInfo,
         // devicefirmwareinfo:devicefirmwareinfoQuery.devicefirmwareinfo,
         devicemaster:devicemasterQuery.devicemaster,
@@ -53,6 +60,6 @@ module.exports = new GraphQLObjectType({
         
 
 
-
+        // detailCandjavatest:detailcandjavaquery.detailCandjavatest
     }
 })

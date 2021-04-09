@@ -38,5 +38,26 @@ firmwaredetailJava: {
         }
     },
     resolve: DetailJava.getByID.bind(DetailJava)
+},
+// Javadetail:{
+//     type: new GraphQLList(type),
+//     args: {
+//         Name: {
+//             type: GraphQLString
+//         },
+//         ServerIP: {
+//             type: GraphQLString
+//         },
+//         UserName:{
+//             type: GraphQLString
+//         },
+//         Password:{
+//             type:  GraphQLString
+//         }
+    
+//     },
+//     resolve: DetailJava.findAll.bind(DetailJava)
+   
+// }
 }
-}
+// console.log("DetailJava",DetailJava.findAll())

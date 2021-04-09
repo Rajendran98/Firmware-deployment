@@ -7,12 +7,12 @@ import {
     GraphQLBoolean,
     GraphQLList,
     GraphQLInt} from 'graphql'
-
+// var CDETAIL=require('../firmwaredetailC/type')
 // Defines the type
 module.exports = new GraphQLObjectType({
     name: 'firmwaredetailjava',
     description: 'javadetail',
-    fields: {
+    fields:()=> ({
         ID: {
             type: new GraphQLNonNull(GraphQLID)
         },
@@ -48,7 +48,16 @@ module.exports = new GraphQLObjectType({
         },
         ReleaseNotes:{
             type: new GraphQLNonNull(GraphQLString)
-        }
+        },
+        IsFirmware:{
+            type:new GraphQLNonNull(GraphQLBoolean)
+        },
+        isSNM476:{
+            type:new GraphQLNonNull(GraphQLBoolean)
+        },
+        // detailc:{
+        //     type:new GraphQLList(CDETAIL)
+        // }
 
-    }
+    })
 })

@@ -9,7 +9,49 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { __assign } from 'tslib';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { stringify } from '@angular/compiler/src/util';
+import {Apollo , QueryRef} from 'apollo-angular';
+import gql from "graphql-tag";
+import { map, shareReplay } from 'rxjs/operators';
+ 
+export type detailC = {
+  ID:Number;
+  Name:String;
+   ServerIP:String;
+  UserName:String;
+  Password:String;
+  FileSize:Number;
+  FilePath:String;
+  Port:Number;
+  InsertUTC:String;
+  UpdateUTC:String;
+  IsActive:Boolean;
+  ReleaseNotes:String;
+  isSNM476:Boolean;
+}
 
+export type DataQuery = {
+  detailC:detailC[]
+}
+
+export type detailJava = {
+  ID:Number;
+  Name:String;
+   ServerIP:String;
+  UserName:String;
+  Password:String;
+  FileSize:Number;
+  FilePath:String;
+  Port:Number;
+  InsertUTC:String;
+  UpdateUTC:String;
+  IsActive:Boolean;
+  ReleaseNotes:String;
+  isSNM476:Boolean;
+}
+
+export type DataQuery1 = {
+  detailJava:detailJava[]
+}
 
 @Component({
   selector: 'app-single-device-search',
@@ -26,7 +68,8 @@ export class SingleDeviceSearchComponent implements OnInit , AfterViewInit , Aft
   public entries: object = [];
   public entries1: object = [];
   public Versions: object = [];
-
+  FirmwareC: object = [];
+  messages:object =[]; 
   select = false;
  sample =[];
  selectedValue: string;
@@ -69,10 +112,62 @@ ngAfterViewInit() {
   
 }
 
-  constructor(private router: Router,private route: ActivatedRoute, private DevicesearchService: DevicesearchService,private _snackBar: MatSnackBar) { }
+  constructor(private router: Router,private route: ActivatedRoute,private apollo: Apollo, private DevicesearchService: DevicesearchService,private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
+
+    const source$ = this.apollo.query<DataQuery>({
+      query: gql`
+      {
+        detailC {
+          ID
+          Name
+          ServerIP
+          UserName
+          Password
+          FileSize
+          FilePath
+          Port
+          InsertUTC
+          UpdateUTC
+          IsActive
+          ReleaseNotes
+          isSNM476
+        }
+      }`   
+    }).pipe(shareReplay(1))
+
+    source$.pipe(map(result => result.data && result.data.detailC)).subscribe((data) =>   
+    this.FirmwareC = data
+  );
+
+
+
+ const source1$ = this.apollo.query<DataQuery1>({
+      query: gql`
+      {
+        detailJava {
+          ID
+          Name
+          ServerIP
+          UserName
+          Password
+          FileSize
+          FilePath
+          Port
+          InsertUTC
+          UpdateUTC
+          IsActive
+          ReleaseNotes
+          isSNM476
+        }
+      }`   
+    }).pipe(shareReplay(1))
+
+    source1$.pipe(map(result => result.data && result.data.detailJava)).subscribe((data) =>   
+    this.messages = data
+  );
     this.DevicesearchService.searchDetails().subscribe(
       data => {
         this.dataSource = new MatTableDataSource(data)
@@ -115,6 +210,7 @@ ngAfterViewInit() {
     });
 
   
+   
 
   
   }
