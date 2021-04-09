@@ -75,6 +75,17 @@
     height: 50px;
     padding: 0 30px
   }  
+  .btns1{
+    position: relative;
+    left: 89%;
+    background-color: #005F9E;
+    color: white;
+    height: 40px;
+    vertical-align: middle;
+    margin-bottom: 10px;
+    margin-top: 14px;
+  
+  }
   
   .btns{
     position: relative;

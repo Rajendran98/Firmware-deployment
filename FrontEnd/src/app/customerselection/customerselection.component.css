@@ -65,8 +65,7 @@
     .reset{
     background-color:#005F9E;
     color: white;
-    margin-left:343px;
-    margin-right: 20px;
+  
     padding-left: 40px;
     padding-right: 40px;
     letter-spacing: 2px;
@@ -76,10 +75,12 @@
     color: white;
     padding-left: 40px;
     padding-right: 40px;
+    margin-left: 20px;
     letter-spacing: 2px;
     }
     .reset-and-select{
     margin-top: 20px;
+    margin-left: 340px;
     }
     .main-container{
     margin-left: 140px;
@@ -117,7 +118,5 @@
     .form{
     max-width: 40%;
     }
-    .reset{
-    margin-left: 1%;
-    }
+  
     }
