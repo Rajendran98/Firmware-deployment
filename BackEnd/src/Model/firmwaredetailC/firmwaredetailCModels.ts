@@ -57,15 +57,17 @@ export class DetailC extends dbqueries {
     // Creates a new device mutations for update 
 
 
-    static async createEntry(_: any, {Name,isfirmware}: any) {
+    static async createEntry(_: any, {Name, ServerIP,UserName,Password,FileSize,FilePath,Port,
+        InsertUTC,UpdateUTC,IsActive,ReleaseNotes,IsFirmware,isSNM476}: any) {
         const connection = await mysqlwrapper.getConnectionFromPool()
         try {
             let _result = await this.insert(connection, {
                 data: {
                     // type,
                     // price
-                    isfirmware,
-                    Name
+                    Name,
+                    ServerIP,UserName,Password,FileSize,FilePath,Port,
+        InsertUTC,UpdateUTC,IsActive,ReleaseNotes,IsFirmware,isSNM476
                 }
             })
           

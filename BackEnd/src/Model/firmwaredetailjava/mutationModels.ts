@@ -8,11 +8,11 @@ import {
     GraphQLInt
 } from 'graphql'
 const type = require('./type')
-const DetailC = require('./firmwaredetailCModels')
+const DetailJava = require('./firmwaredetailjavaModels')
 
 // Defines the mutations
 module.exports = {
-    addDetailC: {
+    addDetailJava: {
         type,
         args: {
             // ID: {
@@ -59,9 +59,9 @@ module.exports = {
             }    
             
         },
-        resolve: DetailC.createEntry.bind(DetailC)
+        resolve: DetailJava.createEntry.bind(DetailJava)
     },
-    updateDetailC: {
+    updateDetailJava: {
         type,
         args: {
             ID:     { type: GraphQLInt },
@@ -72,6 +72,6 @@ module.exports = {
                 type: new GraphQLNonNull(GraphQLInt)
             },
         },
-        resolve: DetailC.updateEntry.bind(DetailC)
+        resolve: DetailJava.updateEntry.bind(DetailJava)
     }
 }

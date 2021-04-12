@@ -2,8 +2,7 @@
 const mysql= require('./mysqlwrapper');
 export class dbqueries {
     static TABLE_NAME: any;
-    static TABLE_NAME1: any;
-    static TABLE_NAME2: any;
+
 
     /**
      * This property can be overriden when the ID column is differet from 'id'

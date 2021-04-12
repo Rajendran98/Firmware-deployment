@@ -156,24 +156,7 @@
           <button   class="sidetxt"  [routerLink] = "'/deviceSearch/'+device.DeviceType" [routerLinkActive] ='"active-list-item1"' [routerLinkActiveOptions]="{exact: true}" 
             mat-menu-item>{{device.DeviceType}}</button>
           <mat-divider></mat-divider>
-        
-          <!-- <button class="sidetxt" mat-menu-item>TAP76</button>
-          <mat-divider></mat-divider>
-          <button class="sidetxt" mat-menu-item>TAP66_2BOX</button>
-          <mat-divider></mat-divider>
-          <button class="sidetxt" mat-menu-item>TAP76C</button>
-          <mat-divider></mat-divider>
-          <button class="sidetxt" mat-menu-item routerLink="/deviceSearch" routerLinkActive="active-list-item1">TAP76D</button>
-          <mat-divider></mat-divider>
-          <button class="sidetxt" mat-menu-item routerLink="/deviceSearch" routerLinkActive="active-list-item1">TAP86</button>
-          <mat-divider></mat-divider>
-          <button class="sidetxt" mat-menu-item>TAP76A</button>
-          <mat-divider></mat-divider>
-          <button class="sidetxt" mat-menu-item>UNKNOWN</button>
-          <mat-divider></mat-divider>
-          <button class="sidetxt" mat-menu-item>TAP66A</button>
-          <mat-divider></mat-divider>
-          <button class="sidetxt" mat-menu-item>TAPI17C</button> -->
+      
           <p hidden [routerLink] = "['/deviceSearch/'+device]" >single</p>
           <p hidden routerLink="/deviceSearch/single_device/1">single</p>
           <p hidden routerLink="/deviceSearch/single_device/2">multi</p>
@@ -182,8 +165,16 @@
         </mat-menu>
       </a>
 
-      <a mat-list-item routerLink="/othercommand" routerLinkActive="active-list-item " >
+      <a mat-list-item (click)="menuTrigger3.openMenu()"  routerLinkActive="active-list-item" [routerLinkActiveOptions]="{exact: true}"><div #menuTrigger3="matMenuTrigger"  [matMenuTriggerFor]="menu3"></div>
         <img src="../assets/Other OTAP command.png"/>
+        <mat-menu #menu3="matMenu"  class="custom-class" >
+          <div *ngFor="let device of OtapDevice">
+            
+            <button   class="sidetxt"  [routerLink] = "'/othercommand/'+device.name" [routerLinkActive] ='"active-list-item1"' [routerLinkActiveOptions]="{exact: true}" 
+              mat-menu-item>{{device.name}}</button>
+            <mat-divider></mat-divider>
+          </div>
+        </mat-menu>
         </a>
         <a mat-list-item (click)="menuTrigger1.openMenu()"  routerLinkActive="active-list-item" [routerLinkActiveOptions]="{exact: true}"><div #menuTrigger1="matMenuTrigger"  [matMenuTriggerFor]="menu"></div>
         <mat-icon>storage</mat-icon>

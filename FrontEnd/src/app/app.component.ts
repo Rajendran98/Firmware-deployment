@@ -52,6 +52,11 @@ export class AppComponent implements OnInit {
   removable = true;
   addOnBlur = true;
   firmwareValues: string[];
+  OtapDevice= [
+    {"name" : "TAP66"},
+    {"name" : "TAP76"},
+    {"name" : "SNM476"}
+  ]
   
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   fruits: Fruit[] = [
@@ -69,19 +74,7 @@ query$: Observable<devicetype[]>;
 
      ngOnInit() {
 
-      const source$ = this.apollo.query<DataQuery>({
-        query: gql`
-        {
-          devicetype {
-            ID
-            DeviceType
-            IsActive
-          }
-        }`
-        
-      }).pipe(shareReplay(1))
-
- source$.pipe(map(result => result.data && result.data.devicetype)).subscribe((data) => this.emp =data);
+    
    
       
 

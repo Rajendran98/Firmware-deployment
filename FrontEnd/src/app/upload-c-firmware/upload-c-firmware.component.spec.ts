@@ -68,7 +68,6 @@ describe('UploadCFirmwareComponent', () => {
     if(testForm.valid){
       post.createCFirmware([testForm.value]).pipe().subscribe(data =>{
       if(data == true){
-        
         expect(matSnackBarSpy.open('Posted value')).toBeTruthy();
       }
       })

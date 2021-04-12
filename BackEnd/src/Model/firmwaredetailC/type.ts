@@ -14,7 +14,7 @@ module.exports = new GraphQLObjectType({
     description: 'detailC',
     fields:()=>({
         ID: {
-            type: new GraphQLNonNull(GraphQLID)
+            type: new GraphQLNonNull(GraphQLInt)
         },
         Name: {
             type: new GraphQLNonNull(GraphQLString)

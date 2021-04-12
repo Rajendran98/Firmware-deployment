@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed ,inject } from '@angular/core/testing';
 
 import { OutboundStatusComponent } from './outbound-status.component';
-
+import { RouterTestingModule } from '@angular/router/testing';
 import {
   HttpClientTestingModule,
   HttpTestingController
@@ -13,7 +13,7 @@ describe('OutboundStatusComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [  HttpClientTestingModule],
+      imports: [  HttpClientTestingModule,RouterTestingModule],
       declarations: [ OutboundStatusComponent ]
     })
     .compileComponents();

@@ -3,6 +3,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
 import { UploadIotFirmwareComponent } from './upload-iot-firmware.component';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 describe('UploadIotFirmwareComponent', () => {
   let component: UploadIotFirmwareComponent;
@@ -11,7 +13,7 @@ describe('UploadIotFirmwareComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule , FormsModule],
+      imports: [RouterTestingModule , FormsModule, HttpClientTestingModule, MatSnackBarModule ],
       declarations: [ UploadIotFirmwareComponent ]
     })
     .compileComponents();
@@ -29,18 +31,18 @@ describe('UploadIotFirmwareComponent', () => {
   });
 
   
-  it('Combination NgForm test valid', () => {
-    const testForm = <NgForm>{
-      value: {
-        versionName: 'version IoT',
-        fileName:'IoT device',
-        Type:'java type'
-      }
-  };
-    component.onClicking(testForm)
-    expect(testForm.valid)
+  // it('Combination NgForm test valid', () => {
+  //   const testForm = <NgForm>{
+  //     value: {
+  //       versionName: 'version IoT',
+  //       fileName:'IoT device',
+  //       Type:'java type'
+  //     }
+  // };
+  //   component.onClicking(testForm)
+  //   expect(testForm.valid)
 
-  });
+  // });
 
   it('Breadcrum routing', () => {
 

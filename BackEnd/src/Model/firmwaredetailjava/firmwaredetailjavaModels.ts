@@ -13,8 +13,8 @@ export class Javadetail extends dbqueries {
     }
 
      // Returns a device by its ID
-    static async getByID(_: any, {id}: { id: any; }) {
-        return await this.find(id)
+    static async getByID(_: any, {ID}: { ID: any; }) {
+        return await this.find(ID)
     }
 
     /**
@@ -32,17 +32,18 @@ export class Javadetail extends dbqueries {
     }
     // Creates a new device mutations for update 
 
-    static async createEntry(_: any, {type, price}: any) {
+    static async createEntry(_: any, {Name, ServerIP,UserName,Password,FileSize,FilePath,Port,
+        InsertUTC,UpdateUTC,IsActive,ReleaseNotes,IsFirmware,isSNM476}: any) {
         const connection = await mysqlwrapper.getConnectionFromPool()
         try {
             let _result = await this.insert(connection, {
                 data: {
-                    type,
-                    price
+                    Name, ServerIP,UserName,Password,FileSize,FilePath,Port,
+        InsertUTC,UpdateUTC,IsActive,ReleaseNotes,IsFirmware,isSNM476
                 }
             })
 
-            return this.getByID(_, {id: _result.insertId})
+            return this.getByID(_, {ID: _result.insertId})
         } finally {
             // Releases the connection
             if (connection != null) connection.release()
@@ -52,19 +53,19 @@ export class Javadetail extends dbqueries {
     /**
      * Updates a device
      */
-    static async updateEntry(_: any, {id, type, price}: any) {
+    static async updateEntry(_: any, {ID, type, price}: any) {
         const connection = await mysqlwrapper.getConnectionFromPool()
         try {
 
             await this.update(connection, {
-                id,
+                ID,
                 data: {
                     type,
                     price
                 }
             })
 
-            return this.getByID(_, {id})
+            return this.getByID(_, {ID})
         } finally {
             // Releases the connection
             if (connection != null) connection.release()

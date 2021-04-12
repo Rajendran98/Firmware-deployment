@@ -4,6 +4,6 @@ describe('StylePaginatorDirective', () => {
   let directive: StylePaginatorDirective;
   it('should create an instance', () => {
   //  const directive = new ();
-    expect(directive).toBeTruthy();
+    expect(directive).toBeDefined();
   });
 });

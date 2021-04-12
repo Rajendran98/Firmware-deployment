@@ -49,7 +49,7 @@ const routes: Routes = [
       path: 'outboundstatus', component:  OutboundStatusComponent
     },
     {
-      path: 'othercommand', component:  OtherOTAPCommandComponent 
+      path: 'othercommand/:device', component:  OtherOTAPCommandComponent 
     },
     {
       path: 'firmwarereport', component:   FirmwareReportComponent

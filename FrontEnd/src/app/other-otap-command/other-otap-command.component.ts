@@ -84,6 +84,7 @@ export class OtherOTAPCommandComponent implements OnInit , AfterViewInit , After
   dataSource : MatTableDataSource<any>
   dataSource1 : MatTableDataSource<any>
   selection = new SelectionModel(false, []);
+  deviceType
 
 
   public device;
@@ -156,6 +157,8 @@ export class OtherOTAPCommandComponent implements OnInit , AfterViewInit , After
            this.temp = this.dataSource.data.length;
     },1000)
           
+
+    
           
 
     const source1$ = this.apollo.query<DataQuery1>({
@@ -175,6 +178,10 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
  this.messages = data
   );
 
+  this.route.params.subscribe(params => {
+    this.deviceType = params['device'];
+    console.log(this.deviceType)
+  });
 
 //   var val = ['n20','n21']
 // for(let entry of val){
