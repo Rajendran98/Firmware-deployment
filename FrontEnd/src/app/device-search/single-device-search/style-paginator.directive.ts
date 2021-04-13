@@ -22,7 +22,7 @@ interface PageObject {
 @Directive({
   selector: "[style-paginator]"
 })
-export class StylePaginatorDirective {
+export class StylePaginatorDirective implements AfterViewInit {
   private _pageGapTxt = "...";
   private _rangeStart: number;
   private _rangeEnd: number;
@@ -41,7 +41,7 @@ export class StylePaginatorDirective {
   set showTotalPages(value: number) {
     this._showTotalPages = value % 2 == 0 ? value + 1 : value;
   }
-  private _showTotalPages = 2;
+  private _showTotalPages = 0;
 
   get inc(): number {
     return this._showTotalPages % 2 == 0
@@ -252,6 +252,7 @@ export class StylePaginatorDirective {
     this.matPag.pageIndex = i;
     this.matPag["_emitPageEvent"](previousPageIndex);
     this.initPageRange();
+    
   }
   //Initialize default state after view init
   public ngAfterViewInit() {

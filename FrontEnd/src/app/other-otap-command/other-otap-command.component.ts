@@ -78,6 +78,7 @@ export class OtherOTAPCommandComponent implements OnInit , AfterViewInit , After
   arrayBuffer:any;
   filelist: any;
   deviceArr = [];
+  entries: object =[];
   loadingFlag1 = true;
   //displayedColumns: string[] = ['select','id','name','cn','np','mn1','mn2','ssd','sed','vtn','model','ccv','cjv'];
   displayedColumns: string[]=["select","DeviceID","DeviceType","Customer","NetworkProvider","MobileNo","Model","VehicleTypeName","CurrentCVersion","CurrentJavaVersion","Ignition"]
@@ -149,15 +150,19 @@ export class OtherOTAPCommandComponent implements OnInit , AfterViewInit , After
       }).pipe(shareReplay(1))
 
  source$.pipe(map(result => result.data && result.data.otherotapcommand)).subscribe((data) =>   
-    this.dataSource = new MatTableDataSource(data)
+   this.dataSource = new MatTableDataSource(data)
     );
+
+   
 
     setTimeout(() =>{
       this.dataSource ? this.loadingFlag = false : this.loadingFlag = true;
            this.temp = this.dataSource.data.length;
+           
     },1000)
           
 
+   
     
           
 
@@ -221,6 +226,11 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
     }
 
 
+    removeFunction(){
+      const filterVal = "TAP66"
+      this.dataSource.filter = filterVal.trim().toLocaleLowerCase() 
+      console.log(this.dataSource)
+    }
     public getCategory = (id) => {
 
       this.apollo.query({
@@ -279,7 +289,10 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
       }
       }
       dash(){
-        this.router.navigate(['Firmware']);
+        // this.router.navigate(['Firmware']);
+        const filterVal = "n20"
+        this.dataSource.filter = filterVal.trim().toLocaleLowerCase() 
+        console.log(this.dataSource)
       }
 
       private isAllSelected() {

@@ -6,12 +6,12 @@ import {
   ApolloTestingModule,
   ApolloTestingController,
 } from 'apollo-angular/testing';
-
+import { Router } from '@angular/router';
 
 describe('CustomerselectionComponent', () => {
   let component: CustomerselectionComponent;
   let fixture: ComponentFixture<CustomerselectionComponent>;
- 
+  let router: Router;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -27,9 +27,17 @@ describe('CustomerselectionComponent', () => {
     fixture = TestBed.createComponent(CustomerselectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    router = TestBed.get(Router);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('Breadcrum routing', () => {
+    const navigateSpy = spyOn(router, 'navigate');
+    component.change();
+    expect(navigateSpy).toHaveBeenCalledWith(['dashboard']);
+
   });
 });

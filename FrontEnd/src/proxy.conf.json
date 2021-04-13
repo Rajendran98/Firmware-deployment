@@ -1,5 +1,12 @@
 {
-
+  "/api6": {
+    "target": "https://identity-stg.trimble.com/token?grant_type=client_credentials",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+    "^/api6": ""
+    }
+    },
   "/api5": {
     "target": "https://identity.trimble.com/token?grant_type=client_credentials",
     "secure": true,

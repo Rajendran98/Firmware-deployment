@@ -85,62 +85,62 @@
           [aria-label]="checkboxLabel(row)"></mat-checkbox> </td>
       </ng-container>
       
-        <ng-container matColumnDef="GPSDeviceID">
+        <ng-container matColumnDef="deviceId">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-          <td mat-cell *matCellDef="let element"><a style=" text-decoration-line: underline;color: #005F9E;">  {{element.GPSDeviceID}} </a></td>
+          <td mat-cell *matCellDef="let element"><a style=" text-decoration-line: underline;color: #005F9E;">  {{element.deviceId}} </a></td>
         </ng-container>
   
     
-        <ng-container matColumnDef="Device_Type">
+        <ng-container matColumnDef="deviceType">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> DEVICE<br>TYPE </th>
-          <td mat-cell *matCellDef="let element"> {{element.Device_Type}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.deviceType}} </td>
         </ng-container>
     
         <ng-container matColumnDef="cn">
           <th mat-header-cell *matHeaderCellDef > CUSTOMER<br>NAME </th>
-          <td mat-cell *matCellDef="let element">  </td>
+          <td mat-cell *matCellDef="let element"> {{element.oemName}} </td>
         </ng-container>
       
         <ng-container matColumnDef="Network_Provider">
           <th mat-header-cell *matHeaderCellDef> NETWORK<br>PROVIDER </th>
-          <td mat-cell *matCellDef="let element"> {{element.Network_Provider}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.networkProvider}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="Mobile_Number">
+        <ng-container matColumnDef="mobileNumber">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> MOBILE NO. </th>
-          <td mat-cell *matCellDef="let element"> {{element.Mobile_Number}}  </td>
+          <td mat-cell *matCellDef="let element"> {{element.mobileNumber}}  </td>
         </ng-container>
 
         <ng-container matColumnDef="mn2">
           <th mat-header-cell *matHeaderCellDef> MOBILE NO. 2 </th>
-          <td mat-cell *matCellDef="let element">  </td>
+          <td mat-cell *matCellDef="let element"> {{element.mobileNumber2}} </td>
         </ng-container>
 
         <ng-container matColumnDef="Subcription_StartDate">
           <th mat-header-cell *matHeaderCellDef> SUBSCRIPTION<br>START DATE </th>
-          <td mat-cell *matCellDef="let element"> {{element.Subcription_StartDate | date:'dd-MM-yyyy'}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.subcriptionStartDate | date:'dd-MM-yyyy'}} </td>
         </ng-container>
 
         <ng-container matColumnDef="Subcription_EndDate">
           <th mat-header-cell *matHeaderCellDef> SUBSCRIPTION<br>END DATE </th>
-          <td mat-cell *matCellDef="let element"> {{element.Subcription_EndDate | date:'dd-MM-yyyy'}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.subcriptionEndDate | date:'dd-MM-yyyy'}} </td>
         </ng-container>
 
         <ng-container matColumnDef="Vehicle_Type">
           <th mat-header-cell *matHeaderCellDef> VECHICLE<br>TYPE NAME </th>
-          <td mat-cell *matCellDef="let element"> {{element.Vehicle_Type}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.vehicleType}} </td>
         </ng-container>
         <ng-container matColumnDef="Vehicle_Model">
           <th mat-header-cell *matHeaderCellDef> MODEL </th>
-          <td mat-cell *matCellDef="let element"> {{element.Vehicle_Model}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.vehicleModel}} </td>
         </ng-container>
         <ng-container matColumnDef="ccv">
           <th mat-header-cell *matHeaderCellDef> CURRENT<br>C VERSION </th>
-          <td mat-cell *matCellDef="let element"> {{element.Device_Type}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.firmwareC}} </td>
         </ng-container>
         <ng-container matColumnDef="cjv">
           <th mat-header-cell *matHeaderCellDef> CURRENT<br>JAVA VERSION </th>
-          <td mat-cell *matCellDef="let element"> {{element.GPSDeviceID}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.firmwareJava}} </td>
         </ng-container>
         <ng-container matColumnDef="ignition">
           <th mat-header-cell *matHeaderCellDef> IGNITION </th>
@@ -151,8 +151,8 @@
 
       </table>
       <div *ngIf="this.temp != null">
-        <mat-paginator style-paginator [showTotalPages]="4" [length]="dataSource.data.length"
-        [pageSize]="8"></mat-paginator>
+        <mat-paginator style-paginator [length]="totalCount"  [showTotalPages]="9"  [pageIndex]="pageIndex"
+        [pageSize]="10"  (page)="pageChangeEvent($event)"></mat-paginator>
       </div>
   
       <div *ngIf="this.temp == null">

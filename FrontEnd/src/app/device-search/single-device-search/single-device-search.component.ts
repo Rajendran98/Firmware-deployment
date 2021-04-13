@@ -78,11 +78,12 @@ export class SingleDeviceSearchComponent implements OnInit , AfterViewInit , Aft
   loadingFlag = true;
   temp = null
   id
-
+  totalCount
+  pageIndex=0;
   public publishVersion: object =[];
   
 //displayedColumns: string[] = ['select','id','name','cn','np','mn1','mn2','ssd','sed','vtn','model','ccv','cjv'];
-  displayedColumns: string[]=["select","GPSDeviceID","Device_Type","cn","Network_Provider","Mobile_Number","mn2","Subcription_StartDate","Subcription_EndDate","Vehicle_Type","Vehicle_Model","ccv","cjv","ignition"]
+  displayedColumns: string[]=["select","deviceId","deviceType","cn","Network_Provider","mobileNumber","mn2","Subcription_StartDate","Subcription_EndDate","Vehicle_Type","Vehicle_Model","ccv","cjv","ignition"]
   dataSource : MatTableDataSource<any>
   selection = new SelectionModel(false, []);
 
@@ -109,6 +110,10 @@ ngAfterContentInit(){
 
 }
 ngAfterViewInit() {
+  if(this.loadingFlag == false){
+    this.dataSource.paginator = this.paginator 
+   // this.dataSource.sort = this.sort;
+  }
   
 }
 
@@ -168,42 +173,45 @@ ngAfterViewInit() {
     source1$.pipe(map(result => result.data && result.data.detailJava)).subscribe((data) =>   
     this.messages = data
   );
-    this.DevicesearchService.searchDetails().subscribe(
-      data => {
-        this.dataSource = new MatTableDataSource(data)
+    // this.DevicesearchService.searchDetails().subscribe(
+    //   data => {
+    //     // this.dataSource = new MatTableDataSource(data)
       
-        this.dataSource ? this.loadingFlag = false : this.loadingFlag = true;
+    //     // this.dataSource ? this.loadingFlag = false : this.loadingFlag = true;
       
-        this.temp = this.dataSource.data.length;
-      }
-    )
+    //     // this.temp = this.dataSource.data.length;
+    //   }
+    // )
 
-     this.DevicesearchService.getVersionDetails().subscribe(
-       data => {
-        this.entries = data
-        function* entries(obj) {
-          for (let key of Object.keys(obj)) {
-            yield [key, obj[key]];
-          }
-       }
+    this.entriesPost(this.pageIndex);
   
-       for (let [key1, value1] of entries(this.entries)) {
+
+    //  this.DevicesearchService.getVersionDetails().subscribe(
+    //    data => {
+    //     this.entries = data
+    //     function* entries(obj) {
+    //       for (let key of Object.keys(obj)) {
+    //         yield [key, obj[key]];
+    //       }
+    //    }
+  
+    //    for (let [key1, value1] of entries(this.entries)) {
 
       
-        if(key1 == 'SearchData'){
+    //     if(key1 == 'SearchData'){
            
-           this.Versions = value1;
+    //        this.Versions = value1;
         
           
-        }
+    //     }
 
-        // for (let [key, value] of entries(value1)) {
+    //     // for (let [key, value] of entries(value1)) {
 
-        // }
+    //     // }
         
-       }
-       }
-     ) 
+    //    }
+    //    }
+    //  ) 
     
     this.route.params.subscribe(params => {
       this.id = params['id'] -1;
@@ -215,7 +223,41 @@ ngAfterViewInit() {
   
   }
 
+  entriesPost(page){
+    this.DevicesearchService.devicePagination(page).subscribe(
+      data => {
+        console.log(data)
+        this.entries = data
+        function* entries(obj) {
+          for (let key of Object.keys(obj)) {
+            yield [key, obj[key]];
+          }
+       }
+  
+       for (let [key1, value1] of entries(this.entries)) {
+        if(key1 == "totalCount"){
+          this.totalCount = value1
+          console.log(this.totalCount)
+        }
+         if(key1 == "result"){
+            this.dataSource = new MatTableDataSource(value1)
+      
+        this.dataSource ? this.loadingFlag = false : this.loadingFlag = true;
+      
+        this.temp = this.dataSource.data.length;
+         }
+       
+       }
+      }
+    )
+  }
 
+
+  pageChangeEvent(page){
+    
+    this.pageIndex = page.pageIndex;
+    this.entriesPost(this.pageIndex)
+  }
 
   
   private paginator: MatPaginator;
@@ -240,7 +282,7 @@ ngAfterViewInit() {
 
   setDataSourceAttributes() {
     if(this.loadingFlag == false){
-    this.dataSource.paginator = this.paginator 
+  //  this.dataSource.paginator = this.paginator 
     this.dataSource.sort = this.sort;
   }
 }

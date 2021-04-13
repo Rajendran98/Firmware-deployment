@@ -4,6 +4,7 @@ import { HttpClient,HttpHeaders } from '@angular/common/http'
 import { Router } from '@angular/router'
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { StylePaginatorDirective } from '../style-paginator.directive';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,13 @@ export class DevicesearchService {
 
   getVersionDetails() {
     return this.http.get<any>(`${environment._dashboard}`).pipe(map(user => {
+      console.log(user);
+      return user;
+  }));
+  }
+
+  devicePagination(page){
+    return this.http.get<any>(`${environment._deviceWithPagination}page=`+page+`&size=10`).pipe(map(user => {
       console.log(user);
       return user;
   }));

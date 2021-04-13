@@ -74,22 +74,31 @@ query$: Observable<devicetype[]>;
 
      ngOnInit() {
 
-    
+      const source$ = this.apollo.query<DataQuery>({
+        query: gql`
+        {
+          devicetype {
+            ID
+            DeviceType
+            IsActive
+          }
+        }`
+        
+      }).pipe(shareReplay(1))
+
+ source$.pipe(map(result => result.data && result.data.devicetype)).subscribe((data) => this.emp =data);
    
       
 
 //  const source1$ = this.apollo.query<DataQuery>({
 //   query: gql`
-//   query otapcommand($DeviceID:String!){
-//     otapcommand(DeviceID: $DeviceID){
-//      DeviceID
+//   {
+//     devicetype {
+//       ID
+//       DeviceType
+//       IsActive
 //     }
-//   }  
-//   `,
-//   variables:{
-//     DeviceID: "n20"
-//   }
-  
+//   }`,
 // }).pipe(shareReplay(1))
 
 // source1$.pipe(map(result => result.data && result.data.devicetype)).subscribe((data) => this.emp1 =data);
