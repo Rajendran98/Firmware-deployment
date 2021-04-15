@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -10,9 +10,15 @@ import { Router } from '@angular/router';
 export class DeviceSearchComponent implements OnInit {
 
   id
-  constructor(private router: Router) { }
+  deviceType
+  constructor(private router: Router,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.deviceType = params['device'];
+      localStorage.setItem('deviceType',this.deviceType)
+      console.log(this.deviceType)
+    });
   }
 
 

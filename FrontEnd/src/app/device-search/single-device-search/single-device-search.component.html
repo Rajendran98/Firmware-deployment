@@ -17,11 +17,11 @@
                         <div class="example-container" >
                         <mat-form-field style="width: 80%;" appearance="outline">
                            
-                            <input style="text-indent: 2em;" matInput  [(ngModel)]="searchKey" (keyup)="applyFilter()" placeholder="Search Device" #input>  
+                            <input style="text-indent: 2em;" matInput  [(ngModel)]="searchKey" placeholder="Search Device" #input>  
                              <mat-icon style="color: gray;" matPrefix>search</mat-icon>
                            
                         </mat-form-field>
-                        <button mat-raised-button class="btn">SUBMIT</button>
+                        <button mat-raised-button class="btn" (click) = search()>SUBMIT</button>
                         
                     </div>
                     </div>
@@ -73,7 +73,7 @@
 </mat-tab-group>
 <div *ngIf="this.id === 0 && loadingFlag" class="uploader-status">
   <mat-spinner></mat-spinner>
-  </div>
+</div>
 <div *ngIf="this.id === 0 && !loadingFlag" >
     <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
 
@@ -150,12 +150,13 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
       </table>
-      <div *ngIf="this.temp != null">
-        <mat-paginator style-paginator [length]="totalCount"  [showTotalPages]="9"  [pageIndex]="pageIndex"
+    </div>     
+      <div *ngIf="this.temp != null ">
+        <mat-paginator style-paginator [length]="totalCount"  [showTotalPages]="10"  [pageIndex]="pageIndex"
         [pageSize]="10"  (page)="pageChangeEvent($event)"></mat-paginator>
       </div>
   
       <div *ngIf="this.temp == null">
         <h3 style="color: #666; text-align: center; font-weight: 500;">Records Not found</h3>
       </div>
-</div>
+

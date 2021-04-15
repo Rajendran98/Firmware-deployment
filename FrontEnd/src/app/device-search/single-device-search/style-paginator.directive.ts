@@ -41,7 +41,7 @@ export class StylePaginatorDirective implements AfterViewInit {
   set showTotalPages(value: number) {
     this._showTotalPages = value % 2 == 0 ? value + 1 : value;
   }
-  private _showTotalPages = 0;
+  private _showTotalPages = 2;
 
   get inc(): number {
     return this._showTotalPages % 2 == 0

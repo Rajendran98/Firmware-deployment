@@ -76,12 +76,14 @@ export class SingleDeviceSearchComponent implements OnInit , AfterViewInit , Aft
   public file : File;
   fileToUpload: File;
   loadingFlag = true;
+  loadingFlag1 = true
   temp = null
   id
-  totalCount
+  totalCount=0;
   pageIndex=0;
+  searchKey:string;
   public publishVersion: object =[];
-  
+  searchType
 //displayedColumns: string[] = ['select','id','name','cn','np','mn1','mn2','ssd','sed','vtn','model','ccv','cjv'];
   displayedColumns: string[]=["select","deviceId","deviceType","cn","Network_Provider","mobileNumber","mn2","Subcription_StartDate","Subcription_EndDate","Vehicle_Type","Vehicle_Model","ccv","cjv","ignition"]
   dataSource : MatTableDataSource<any>
@@ -120,8 +122,8 @@ ngAfterViewInit() {
   constructor(private router: Router,private route: ActivatedRoute,private apollo: Apollo, private DevicesearchService: DevicesearchService,private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-
-
+    this.searchType = localStorage.getItem('deviceType')
+  
     const source$ = this.apollo.query<DataQuery>({
       query: gql`
       {
@@ -182,8 +184,8 @@ ngAfterViewInit() {
     //     // this.temp = this.dataSource.data.length;
     //   }
     // )
-
-    this.entriesPost(this.pageIndex);
+    var pages = "/specificChar?deviceType="+this.searchType+"&page="+this.pageIndex+"&size=10";
+    this.entriesPost(pages);
   
 
     //  this.DevicesearchService.getVersionDetails().subscribe(
@@ -224,6 +226,8 @@ ngAfterViewInit() {
   }
 
   entriesPost(page){
+   
+    console.log(page)
     this.DevicesearchService.devicePagination(page).subscribe(
       data => {
         console.log(data)
@@ -256,13 +260,21 @@ ngAfterViewInit() {
   pageChangeEvent(page){
     
     this.pageIndex = page.pageIndex;
-    this.entriesPost(this.pageIndex)
+    this.loadingFlag = true
+    var pages = "/specificChar?deviceType="+this.searchType+"&page="+this.pageIndex+"&size=10";
+    this.entriesPost(pages)
   }
 
+  search(){
+    //
+    var pages = "/singleSearch?deviceid="+this.searchKey;
+    this.loadingFlag = true
+    this.entriesPost(pages)
+  }
   
   private paginator: MatPaginator;
   private sort: MatSort;
-  searchKey:string;
+
   
 
   @ViewChild(MatSort) set matSort(ms: MatSort) {

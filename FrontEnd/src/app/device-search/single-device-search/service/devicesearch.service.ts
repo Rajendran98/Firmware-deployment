@@ -28,12 +28,13 @@ export class DevicesearchService {
   }
 
   devicePagination(page){
-    return this.http.get<any>(`${environment._deviceWithPagination}page=`+page+`&size=10`).pipe(map(user => {
+    return this.http.get<any>(`${environment._deviceWithPagination}`+page+``).pipe(map(user => {
       console.log(user);
       return user;
   }));
   }
 
+ 
   PublishedVersion(data) {
     return this.http.post<object>(`${environment._publishVersion}`, data).pipe(map(user => {
       console.log(user);
