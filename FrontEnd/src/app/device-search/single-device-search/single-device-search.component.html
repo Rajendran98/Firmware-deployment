@@ -27,15 +27,16 @@
                     </div>
                     <div class="col-sm-5">
                         <p>UPDATE VERSION :</p>
-                        <mat-radio-group color="primary" aria-label="Select an option" [(ngModel)]="select" >
+                        <!-- <mat-radio-group color="primary" aria-label="Select an option" [(ngModel)]="select" >
                             <mat-radio-button [value]="messages">JAVA</mat-radio-button>
-                            <mat-radio-button [value]="FirmwareC">C</mat-radio-button>
-                          </mat-radio-group>
-                          <mat-form-field style="width: 100px; margin-left: 10px;" appearance="standard">
+                            <mat-radio-button [value]="">C</mat-radio-button>
+                          </mat-radio-group> -->
+                          <mat-form-field style="width: 150px; margin-left: 10px;" appearance="standard">
+                            <mat-label>SELECT COMMAND</mat-label>
                             <mat-select [(ngModel)]="selectedValue">
                               <div > 
 
-                                <mat-option *ngFor="let version of select" (click)="listed(version)" [value]="version.Name">
+                                <mat-option *ngFor="let version of FirmwareC" (click)="listed(version)" [value]="version.Name">
                                   {{version.Name}}
                                 </mat-option>
                               </div>

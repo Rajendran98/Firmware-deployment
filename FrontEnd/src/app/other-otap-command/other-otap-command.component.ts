@@ -49,12 +49,12 @@ export type DataQuery1 ={
 
 const UPVOTE_POST = gql`
 
-mutation addotapcommand($PacketID:Int! ,$DeviceID: String!, $Name: String!,$Message: String!) {
-  addotapcommand (PacketID: $PacketID,DeviceID: $DeviceID,Name: $Name,Message: $Message ){
+mutation addotapcommand($PacketID:Int! ,$DeviceType: String!, $CommandName: String!,$MessageFormat: String!) {
+  addotapcommand (PacketID: $PacketID,DeviceType: $DeviceType,CommandName: $CommandName,MessageFormat: $MessageFormat ){
     PacketID
-    DeviceID
-    Name
-    Message
+    DeviceType
+    CommandName
+    MessageFormat
   }
 }
 `;
@@ -91,6 +91,7 @@ export class OtherOTAPCommandComponent implements OnInit , AfterViewInit , After
   public device;
   public messageFormat;
   public messageName;
+  public packetId;
   
   //@ViewChild(MatPaginator) paginator: MatPaginator;
   //@ViewChild(MatSort) sort: MatSort;
@@ -170,10 +171,10 @@ export class OtherOTAPCommandComponent implements OnInit , AfterViewInit , After
       query: gql`
       {
         OtapCommand{
-          Message
-          Name
-          DeviceID
+          DeviceType
+          CommandName
           PacketID
+          MessageFormat
         }
       }`
       
@@ -182,6 +183,9 @@ export class OtherOTAPCommandComponent implements OnInit , AfterViewInit , After
 source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((data) =>   
  this.messages = data
   );
+
+
+
 
   this.route.params.subscribe(params => {
     this.deviceType = params['device'];
@@ -360,32 +364,55 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
         console.log(version)
         for (const [key, value] of Object.entries(version)) {
 
-          if(key == "Message"){
+          if(key == "MessageFormat"){
             this.messageFormat = value
+           
+          //   let jsonObject = JSON.parse(this.messageFormat);
+          //   console.log(jsonObject)
+          //   for (let country of Object.keys(jsonObject)) {
+          //     var capital = jsonObject[country];
+              
+          // }
+          
+          // for (const [country, capital] of Object.entries(jsonObject))
+          //     console.log(country);
           }
-          if(key == "Name"){
+          if(key == "CommandName"){
             this.messageName = value
+          }
+          if(key == "PacketID"){
+            this.packetId = value
           }
 
         }
       }
 
       PostData(){
-        if(this.device == undefined || this.messageName == undefined)
-        {
-          this._snackBar.open("Select Command and CheckBox To Upgrade Command","",{duration: 5000});
-        }
-        if(this.device != undefined && this.messageName != undefined)
-        {
-          let objData = Object.assign({update: [{Device: this.device , DeviceID: 351431 , MessageFormat: this.messageFormat , FirmwareUpgradeEnum: 17 , IOTDevice: "" , MessageName: this.messageName , AppInstanceID: null , DeviceGateway: "TDMG" , UserID: 2739}]});
-          console.log(objData)
-          this.UpgradecommandService.PublishedVersion(objData).pipe().subscribe(data=>{
-          console.log(data)
-          this._snackBar.open(this.device + " Updated Successfully","",{duration: 5000});
-          },
-          (error) => this._snackBar.open("DeviceID Mismatch","",{duration: 5000})
-          )
-        }
+
+        const dialogRef = this.dialog.open(flashFirmware, {
+          width: '400px',
+          data: {message:this.messageFormat,messagename: this.messageName ,Device: this.device,packetId: this.packetId}
+        });
+    
+       dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+ 
+        });
+        // if(this.device == undefined || this.messageName == undefined)
+        // {
+        //   this._snackBar.open("Select Command and CheckBox To Upgrade Command","",{duration: 5000});
+        // }
+        // if(this.device != undefined && this.messageName != undefined)
+        // {
+        //   let objData = Object.assign({update: [{Device: this.device , DeviceID: 351431 , MessageFormat: this.messageFormat , FirmwareUpgradeEnum: 17 , IOTDevice: "" , MessageName: this.messageName , AppInstanceID: null , DeviceGateway: "TDMG" , UserID: 2739}]});
+        //   console.log(objData)
+        //   this.UpgradecommandService.PublishedVersion(objData).pipe().subscribe(data=>{
+        //   console.log(data)
+        //   this._snackBar.open(this.device + " Updated Successfully","",{duration: 5000});
+        //   },
+        //   (error) => this._snackBar.open("DeviceID Mismatch","",{duration: 5000})
+        //   )
+        // }
       }
       
 
@@ -432,9 +459,9 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
           variables: 
           {
             PacketID:this.packetId,
-            DeviceID:this.deviceId,
-            Name: this.name,
-            Message: this.message
+            DeviceType:this.deviceId,
+            CommandName: this.name,
+            MessageFormat: this.message
           }
         }).subscribe(({data }) => {
           this._snackBar.open("Value Uploaded Successfully","",{duration: 2000});
@@ -454,4 +481,60 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
   
   }
   
+
+
+  
+  @Component({
+    selector: 'flashFirmware',
+    templateUrl: 'FlashFirmware.html',
+  })
+  export class flashFirmware {
+    ClusterArrays : any = [];
+  public json;
+  public messageName
+  public device
+  public packetId
+    constructor(private apollo: Apollo,private _snackBar: MatSnackBar ,private UpgradecommandService: UpgradecommandService,
+      public dialogRef: MatDialogRef<addCommand>,
+      @Inject(MAT_DIALOG_DATA) public data: {message: string,messagename: string,packetId: string,Device: string }) {
+        this.json = data.message
+        this.messageName = data.messagename
+       this.device = data.Device
+       this.packetId = data.packetId
+        let jsonObject = JSON.parse(this.json);
+        console.log(jsonObject)
+        for (let country of Object.keys(jsonObject)) {
+          var capital = jsonObject[country];
+          
+      }
+      
+      for (const [country, capital] of Object.entries(jsonObject)){
+        
+        this.ClusterArrays.push(country)
+      }
+         
+      }
+      
+    
+
+    onNoClick(): void {
+      this.dialogRef.close();
+    }
+
+    AddCommand(addCommandForm: NgForm){
+      if(addCommandForm.valid){
+        let oops = JSON.stringify(addCommandForm.value)
+      //  console.log(oops) "NJ042612"
+        let objData = Object.assign({update: [{Device: "NG356545", DeviceID: 351431 , MessageFormat: oops, FirmwareUpgradeEnum: this.packetId , IOTDevice: "" , MessageName: this.messageName , AppInstanceID: null , DeviceGateway: "TDMG" , UserID: 2739}]});
+        console.log(objData)
+        this.UpgradecommandService.PublishedVersion(objData).pipe().subscribe(data=>{
+            console.log(data)
+            this._snackBar.open(this.device + " Updated Successfully","",{duration: 5000});
+            },
+            (error) => this._snackBar.open("DeviceID Mismatch","",{duration: 5000})
+            )
+      }
+    }
+  
+  }
   

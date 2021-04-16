@@ -53,6 +53,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { GraphQLModule } from './graphql.module';
 import {MatDialogModule} from '@angular/material/dialog';
 import {addCommand} from './other-otap-command/other-otap-command.component'
+import {flashFirmware} from './other-otap-command/other-otap-command.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,7 +72,8 @@ import {addCommand} from './other-otap-command/other-otap-command.component'
     FirmwareReportComponent,
     LoginComponent,
     CustomerselectionComponent,
-    addCommand
+    addCommand,
+    flashFirmware
     
   
     
@@ -110,7 +112,7 @@ import {addCommand} from './other-otap-command/other-otap-command.component'
     MatDialogModule
 
   ],
-  entryComponents: [addCommand],
+  entryComponents: [addCommand,flashFirmware],
   providers: [ AuthenticationService,OutboundService ,{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,

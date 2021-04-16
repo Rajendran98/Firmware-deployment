@@ -99,7 +99,7 @@ export class UploadIotFirmwareComponent implements OnInit {
         IsActive:true,
         ReleaseNotes:"20",
         IsFirmware:true,
-        isSNM476:false
+        isSNM476:true
       }
     }).subscribe(({data }) => {
       this._snackBar.open("Value Uploaded Successfully","",{duration: 2000});

@@ -19,7 +19,7 @@ export class TokenInterceptorService  implements HttpInterceptor {
     // let authService = this.injector.get(AuthenticationService)
     const user = this.authenticationService.userValue;
     const isLoggedIn = user && userdetails['authdata'];
-    const isApiUrl = request.url.startsWith(`${environment._loginStg}`);
+    const isApiUrl = request.url.startsWith(`${environment._loginProdUrl}`);
     if (isLoggedIn && !isApiUrl) {
     console.log(access_token);
         request = request.clone({

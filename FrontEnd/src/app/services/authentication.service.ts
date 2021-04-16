@@ -27,12 +27,12 @@ export class AuthenticationService {
     loginUser(loginData) {
       let headers = new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Basic V2ZJNjlCSVN4NlhzcVB2UVJrRFlJZTVZU3lRYTpmMVhBcjFrVmdkQW00a01mU1lNYzNNQUdtaUlh'}); 
-      //'Authorization': 'Basic dzhxZTYxaTZrT0J5MVFobE5PUUVodGRLOUpzYTpYcFdEVVF4R3hfd2ZFb25EeGw4REhJN2s0Y0Fh'});
+      //  'Authorization': 'Basic V2ZJNjlCSVN4NlhzcVB2UVJrRFlJZTVZU3lRYTpmMVhBcjFrVmdkQW00a01mU1lNYzNNQUdtaUlh'}); 
+      'Authorization': 'Basic dzhxZTYxaTZrT0J5MVFobE5PUUVodGRLOUpzYTpYcFdEVVF4R3hfd2ZFb25EeGw4REhJN2s0Y0Fh'});
         // 'Authorization': 'Basic aHdmaXRqQlQ1bGVvWm9qeFZ4SzRnMlpwM0FFYTpNMDYzbDdZSk5TRzBrUVBwS3BKVEVDcmNPNElh'});
         let options = { headers: headers };
     
-      return this.http.post<any>(`${environment._loginStg}`,loginData,options).pipe(map(user => {
+      return this.http.post<any>(`${environment._loginProdUrl}`,loginData,options).pipe(map(user => {
         console.log(user);
         // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
         user.authdata = user.access_token;

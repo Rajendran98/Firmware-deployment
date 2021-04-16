@@ -34,13 +34,13 @@ export class Otapcommand extends dbqueries {
     }
     // Creates a new device mutations for update 
 
-    static async createEntry(_: any, {PacketID, DeviceID,Name,Message}: any) {
+    static async createEntry(_: any, {PacketID, DeviceType,CommandName,MessageFormat}: any) {
         const connection = await mysqlwrapper.getConnectionFromPool()
         try {
             
             let _result = await this.insert(connection, {
                 data: {
-                    PacketID, DeviceID,Name,Message
+                    PacketID, DeviceType,CommandName,MessageFormat
                 }
             })
 

@@ -27,8 +27,8 @@
                           <mat-select name="javaV" placeholder="JAVA VERSION">
                             
 
-                              <mat-option *ngFor="let message of messages" (click)="listed(message)" [value]="message.Name">
-                                {{message.Name}}
+                              <mat-option *ngFor="let message of messages" (click)="listed(message)" [value]="message.CommandName">
+                                {{message.CommandName}}
                               </mat-option>
                             
                           
@@ -147,7 +147,7 @@
   
    
       <mat-paginator style-paginator [showTotalPages]="4" [length]="dataSource.data.length"
-      [pageSize]="1"></mat-paginator>
+      [pageSize]="10"></mat-paginator>
      
     </div>
     <div *ngIf="this.temp == null">

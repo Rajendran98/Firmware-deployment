@@ -315,17 +315,13 @@ toggleRow(row: any, index: number) {
   this.selection.toggle(row);
   console.log(row)
   for (const [key, value] of Object.entries(row)) {
-    if(key == "GPSDeviceID")
+    if(key == "deviceId")
     {
       this.Device = value
-      // __assign(this.publishVersion,{update: [{Device: value , DeviceID: 351431}]})
-      // console.log(this.publishVersion)
+      console.log(this.Device)
 
     }
-    if(key == "Firmware_Version")
-    {
-      this.FirmwareVersion = value
-    }
+   
   }
 }
 
@@ -379,42 +375,41 @@ checkboxLabel(row?: any): string {
       if(key == "Password"){
         this.Password = value
       }
-      if(key == "APN"){
-        this.APN =value
-      }
-      if(key == "ID")
-      {
-        this.UserID = value
-      }
+      // if(key == "APN"){
+      //   this.APN =value
+      // }
+      // if(key == "ID")
+      // {
+      //   this.UserID = value
+      // }
     }
   }
 
   postData(selected){
     this.select = selected
-    if(this.select == true && this.version != undefined && this.Device != undefined)
+    if(this.version != undefined && this.Device != undefined)
     {
-      let objData = Object.assign({update: [{Device: this.Device , DeviceID: 351431 , CVersion: this.version , JavaVersion: "", ServerIP: this.ServerIP , FilePath: this.FilePath , FileSize: this.FileSize , FirmwareVersion: this.FirmwareVersion , FirmwareType: 0 , Port: this.Port , UserName: this.UserName , Password: this.Password , FirmwareUpgradeEnum: 34 , APN: this.APN , AppInstanceID: null , UserID: "2739" , Internal: false , DeviceGateway: "TDMG" , IOTDevice: ""}]})
+      let objData = Object.assign({update: [{Device: this.Device , DeviceID: 351431 , CVersion: this.version , JavaVersion: "", ServerIP: this.ServerIP , FilePath: this.FilePath , FileSize: this.FileSize , FirmwareVersion: this.version , FirmwareType: 0 , Port: this.Port , UserName: this.UserName , Password: this.Password , FirmwareUpgradeEnum: 34 , APN: this.APN , AppInstanceID: null , UserID: "2739" , Internal: false , DeviceGateway: "TDMG" , IOTDevice: ""}]})
     
       console.log(objData)
       this.DevicesearchService.PublishedVersion(objData).pipe().subscribe(data=>{
         console.log(data)
-       
       this._snackBar.open(this.Device + " Updated Successfully","",{duration: 5000});
         })
       
-        // this.finalPost();
+      
     }
   
 
-    if(this.select == false && this.version != undefined && this.Device != undefined)
-    {
-      let objData = Object.assign({update: [{Device: this.Device , DeviceID: 351431 , CVersion: "" , JavaVersion: this.version , ServerIP: this.ServerIP , FilePath: this.FilePath , FileSize: this.FileSize , FirmwareVersion: this.FirmwareVersion , FirmwareType: 0 , Port: this.Port , UserName: this.UserName , Password: this.Password , FirmwareUpgradeEnum: 34 , APN: this.APN , AppInstanceID: null , UserID: "2739" , Internal: false , DeviceGateway: "TDMG" , IOTDevice: ""}]})
+    // if(this.select == false && this.version != undefined && this.Device != undefined)
+    // {
+    //   let objData = Object.assign({update: [{Device: this.Device , DeviceID: 351431 , CVersion: "" , JavaVersion: this.version , ServerIP: this.ServerIP , FilePath: this.FilePath , FileSize: this.FileSize , FirmwareVersion: this.FirmwareVersion , FirmwareType: 0 , Port: this.Port , UserName: this.UserName , Password: this.Password , FirmwareUpgradeEnum: 34 , APN: this.APN , AppInstanceID: null , UserID: "2739" , Internal: false , DeviceGateway: "TDMG" , IOTDevice: ""}]})
   
-        this.DevicesearchService.PublishedVersion(objData).pipe().subscribe(data=>{
-          console.log(data)
-          this._snackBar.open(this.Device + " Updated Successfully","",{duration: 5000});
-          })
-    }
+    //     this.DevicesearchService.PublishedVersion(objData).pipe().subscribe(data=>{
+    //       console.log(data)
+    //       this._snackBar.open(this.Device + " Updated Successfully","",{duration: 5000});
+    //       })
+    // }
     if(this.version == undefined || this.Device == undefined)
     {
       this._snackBar.open("Select Version and CheckBox To Update Version","",{duration: 5000});

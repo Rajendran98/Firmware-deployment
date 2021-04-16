@@ -20,13 +20,13 @@ module.exports = new GraphQLObjectType({
         PacketID: {
             type: new GraphQLNonNull(GraphQLInt)
         },
-        DeviceID: {
+        DeviceType: {
             type: new GraphQLNonNull(GraphQLString)
         },
-        Name: {
+        CommandName: {
             type: new GraphQLNonNull(GraphQLString)
         },
-        Message: {
+        MessageFormat: {
             type: new GraphQLNonNull(GraphQLString)
         },
       
