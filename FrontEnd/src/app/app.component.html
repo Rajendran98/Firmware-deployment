@@ -167,11 +167,11 @@
 
       <a mat-list-item (click)="menuTrigger3.openMenu()"  routerLinkActive="active-list-item" [routerLinkActiveOptions]="{exact: true}"><div #menuTrigger3="matMenuTrigger"  [matMenuTriggerFor]="menu3"></div>
         <img src="../assets/Other OTAP command.png"/>
-        <mat-menu #menu3="matMenu"  class="custom-class" >
+        <mat-menu #menu3="matMenu" class="custom-class" >
           <div *ngFor="let device of OtapDevice">
             
-            <button   class="sidetxt"  [routerLink] = "'/othercommand/'+device.name" [routerLinkActive] ='"active-list-item1"' [routerLinkActiveOptions]="{exact: true}" 
-              mat-menu-item>{{device.name}}</button>
+            <button  class="sidetxt"  [routerLink] = "'/othercommand/'+device.name" [routerLinkActive] ='"active-list-item1"' [routerLinkActiveOptions]="{exact: true}" 
+              mat-menu-item  (click)="exit()">{{device.name}}</button>
             <mat-divider></mat-divider>
           </div>
         </mat-menu>

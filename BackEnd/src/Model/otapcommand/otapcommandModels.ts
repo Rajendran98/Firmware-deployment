@@ -15,8 +15,8 @@ export class Otapcommand extends dbqueries {
     }
 
      // Returns a device by its ID
-    static async getByID(_: any, {DeviceID}: { DeviceID: any }) {
-        return await this.find(DeviceID)
+    static async getByID(_: any, {ID}: { ID: any }) {
+        return await this.find(ID)
     }
 
     /**
@@ -44,7 +44,7 @@ export class Otapcommand extends dbqueries {
                 }
             })
 
-            return this.getByID(_, {DeviceID: _result.insertId})
+            return this.getByID(_, {ID: _result.insertId})
         } finally {
             // Releases the connection
             if (connection != null) connection.release()
@@ -54,19 +54,19 @@ export class Otapcommand extends dbqueries {
     /**
      * Updates a device
      */
-    static async updateEntry(_: any, {DeviceID, type, price}: any) {
+    static async updateEntry(_: any, {ID, type, price}: any) {
         const connection = await mysqlwrapper.getConnectionFromPool()
         try {
 
             await this.update(connection, {
-                DeviceID,
+                ID,
                 data: {
                     type,
                     price
                 }
             })
 
-            return this.getByID(_, {DeviceID})
+            return this.getByID(_, {ID})
         } finally {
             // Releases the connection
             if (connection != null) connection.release()

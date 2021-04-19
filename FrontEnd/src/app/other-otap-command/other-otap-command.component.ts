@@ -92,81 +92,30 @@ export class OtherOTAPCommandComponent implements OnInit , AfterViewInit , After
   public messageFormat;
   public messageName;
   public packetId;
-  
+
+
+
   //@ViewChild(MatPaginator) paginator: MatPaginator;
   //@ViewChild(MatSort) sort: MatSort;
-
-  private paginator: MatPaginator;
-  private sort: MatSort;
-
   @ViewChild(MatTableExporterDirective, { static: false }) exporter: MatTableExporterDirective;
-  @ViewChild(MatSort) set matSort(ms: MatSort) {
-    this.sort = ms;
-    this.setDataSourceAttributes();
-  }
 
-  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
-    this.paginator = mp;
-    this.setDataSourceAttributes();
-  }
-
-  setDataSourceAttributes() {
-    if(this.loadingFlag == false){
-      this.dataSource.paginator = this.paginator 
-      this.dataSource.sort = this.sort;
-    }
-  }
-  
-  ngAfterContentInit(){
-   
-  
-  }
+ 
   ngAfterViewInit() {
-    //this.dataSource.paginator = this.paginator;
-   // this.dataSource.sort = this.sort;
+  //  this.dataSource.paginator = this.paginator 
+    }
+  ngAfterContentInit(){
+ 
   }
-  
+
     constructor(private route: ActivatedRoute, private UpgradecommandService: UpgradecommandService, private _snackBar: MatSnackBar ,private router: Router,public dialog: MatDialog,private apollo: Apollo) { }
   
     ngOnInit(): void {
-    
-      
-      const source$ = this.apollo.query<DataQuery>({
-        query: gql`
-        {
-          otherotapcommand {
-              DeviceID
-              DeviceType
-              Customer
-              NetworkProvider
-              MobileNo
-              Model
-              VehicleTypeName
-              CurrentCVersion
-              CurrentJavaVersion
-              Ignition
-            }
-        }`
+      this.route.params.subscribe(params => {
+        this.deviceType = params['device'];
+        console.log(this.deviceType)
         
-      }).pipe(shareReplay(1))
-
- source$.pipe(map(result => result.data && result.data.otherotapcommand)).subscribe((data) =>   
-   this.dataSource = new MatTableDataSource(data)
-    );
-
-   
-
-    setTimeout(() =>{
-      this.dataSource ? this.loadingFlag = false : this.loadingFlag = true;
-           this.temp = this.dataSource.data.length;
-           
-    },1000)
-          
-
-   
-    
-          
-
+        this.OnDataLoad(this.deviceType)
+      });
     const source1$ = this.apollo.query<DataQuery1>({
       query: gql`
       {
@@ -184,56 +133,44 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
  this.messages = data
   );
 
-
-
-
-  this.route.params.subscribe(params => {
-    this.deviceType = params['device'];
-    console.log(this.deviceType)
-  });
-
-//   var val = ['n20','n21']
-// for(let entry of val){
-//   this.getCategory(entry)
-// }
-
-
-  // const source2$ = this.apollo.query<DataQuery>({
-  //   query: gql`
-  //     query otapcommand($DeviceID:String){
-  //       otapcommand(DeviceID: $DeviceID){
-  //         DeviceID,
-  //         DeviceID
-  //         DeviceType
-  //         Customer
-  //         NetworkProvider
-  //         MobileNo
-  //         Model
-  //         VehicleTypeName
-  //         CurrentCVersion
-  //         CurrentJavaVersion
-  //         Ignition
-  //       }
-  //     }  
-  //   `,
-  //   variables:{
-  //     DeviceID: "n20"
-  //   }
-    
-  // }).pipe(shareReplay(1))
-  
-  // source2$.pipe(map(result => result.data && result.data.otherotapcommand)).subscribe((data) => 
-  // this.emp1 = data);
-  
-  
-  
-    }
+}
 
 
     removeFunction(){
       const filterVal = "TAP66"
       this.dataSource.filter = filterVal.trim().toLocaleLowerCase() 
       console.log(this.dataSource)
+    }
+
+    public OnDataLoad  = (devicetypes) =>{
+      
+  this.apollo.query({
+    query: gql`
+    query otapcommand($DeviceType:String!){
+      otapcommand(DeviceType: $DeviceType){
+        DeviceID
+        DeviceType
+        Customer
+        NetworkProvider
+        Model
+        VehicleTypeName
+        Model
+        CurrentCVersion
+        CurrentJavaVersion
+        Ignition
+      }
+    }
+  `,
+  variables:{
+    DeviceType: this.deviceType
+  }
+  }).subscribe(result => {
+    console.log(result.data['otapcommand'])
+    this.dataSource = new MatTableDataSource(result.data['otapcommand'])
+   this.dataSource ? this.loadingFlag = false : this.loadingFlag = true;
+        this.temp = this.dataSource.data.length;
+  })
+
     }
     public getCategory = (id) => {
 
@@ -265,7 +202,27 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
       })
     }
   
+    private paginator: MatPaginator;
+    private sort: MatSort;
   
+   
+    @ViewChild(MatSort) set matSort(ms: MatSort) {
+      this.sort = ms;
+      this.setDataSourceAttributes();
+    }
+  
+    @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+      this.paginator = mp;
+      this.setDataSourceAttributes();
+    }
+  
+    setDataSourceAttributes() {
+      if(this.loadingFlag == false){
+     // this.dataSource.paginator = this.paginator 
+        this.dataSource.sort = this.sort;
+      }
+    }
+
     applyFilter(event: Event) {
       const filterValue = (event.target as HTMLInputElement).value;
       this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -276,7 +233,10 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
       this.dataSource1.filter = filterValue.trim().toLowerCase();
     }
     ngAfterContentChecked()	{
-      //setTimeout(() => this.dataSource.paginator = this.paginator);
+      if(this.loadingFlag == false){
+      setTimeout(() => 
+      this.dataSource.paginator = this.paginator);
+      }
     }
   
   
@@ -391,7 +351,7 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
 
         const dialogRef = this.dialog.open(flashFirmware, {
           width: '400px',
-          data: {message:this.messageFormat,messagename: this.messageName ,Device: this.device,packetId: this.packetId}
+          data: {message:this.messageFormat,messagename: this.messageName ,Device: this.device,packetId: this.packetId,deviceType:this.deviceType}
         });
     
        dialogRef.afterClosed().subscribe(result => {
@@ -494,13 +454,15 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
   public messageName
   public device
   public packetId
-    constructor(private apollo: Apollo,private _snackBar: MatSnackBar ,private UpgradecommandService: UpgradecommandService,
+  public deviceType
+    constructor(private apollo: Apollo,private route: ActivatedRoute, private _snackBar: MatSnackBar ,private UpgradecommandService: UpgradecommandService,
       public dialogRef: MatDialogRef<addCommand>,
-      @Inject(MAT_DIALOG_DATA) public data: {message: string,messagename: string,packetId: string,Device: string }) {
+      @Inject(MAT_DIALOG_DATA) public data: {message: string,messagename: string,packetId: string,Device: string,deviceType: string }) {
         this.json = data.message
         this.messageName = data.messagename
        this.device = data.Device
        this.packetId = data.packetId
+       this.deviceType = data.deviceType
         let jsonObject = JSON.parse(this.json);
         console.log(jsonObject)
         for (let country of Object.keys(jsonObject)) {
@@ -511,6 +473,7 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
       for (const [country, capital] of Object.entries(jsonObject)){
         
         this.ClusterArrays.push(country)
+        
       }
          
       }
@@ -522,8 +485,10 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
     }
 
     AddCommand(addCommandForm: NgForm){
-      if(addCommandForm.valid){
+      if(this.deviceType != "SNM476"){
+     if(addCommandForm.valid){
         let oops = JSON.stringify(addCommandForm.value)
+       
       //  console.log(oops) "NJ042612"
         let objData = Object.assign({update: [{Device: "NG356545", DeviceID: 351431 , MessageFormat: oops, FirmwareUpgradeEnum: this.packetId , IOTDevice: "" , MessageName: this.messageName , AppInstanceID: null , DeviceGateway: "TDMG" , UserID: 2739}]});
         console.log(objData)
@@ -534,6 +499,31 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
             (error) => this._snackBar.open("DeviceID Mismatch","",{duration: 5000})
             )
       }
+      }
+      if(this.deviceType == "SNM476"){
+        if(addCommandForm.valid){
+        var str = '';
+        for (const [country, capital] of Object.entries(addCommandForm.value)){
+          str += capital+",";  
+         }
+        
+
+         let objData = Object.assign({"state": {"desired": {"S01":str}}})
+         let oops = JSON.stringify(objData);
+         
+
+
+         let objData1 = Object.assign({update: [{Device: "NG356545", DeviceID: 351431 , MessageFormat: oops, FirmwareUpgradeEnum: this.packetId , IOTDevice: "" , MessageName: this.messageName , AppInstanceID: null , DeviceGateway: "TDMG" , UserID: 2739}]});
+         console.log(objData1)
+         this.UpgradecommandService.PublishedVersion(objData1).pipe().subscribe(data=>{
+             console.log(data)
+             this._snackBar.open(this.device + " Updated Successfully","",{duration: 5000});
+             },
+             (error) => this._snackBar.open("DeviceID Mismatch","",{duration: 5000})
+             )
+      }
+    }
+     
     }
   
   }

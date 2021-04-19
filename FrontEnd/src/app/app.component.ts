@@ -162,6 +162,8 @@ query$: Observable<devicetype[]>;
 
 
 
-
+exit(){
+  setTimeout(() =>  location.reload())
+}
     
 }

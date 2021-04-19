@@ -26,11 +26,11 @@
                           <mat-label>SELECT COMMAND</mat-label>
                           <mat-select name="javaV" placeholder="JAVA VERSION">
                             
-
-                              <mat-option *ngFor="let message of messages" (click)="listed(message)" [value]="message.CommandName">
+                            <div *ngFor="let message of messages">
+                              <mat-option *ngIf="message.DeviceType == deviceType" (click)="listed(message)" [value]="message.CommandName">
                                 {{message.CommandName}}
                               </mat-option>
-                            
+                            </div>
                           
                           </mat-select>
                         </mat-form-field>
@@ -147,7 +147,7 @@
   
    
       <mat-paginator style-paginator [showTotalPages]="4" [length]="dataSource.data.length"
-      [pageSize]="10"></mat-paginator>
+      [pageSize]="1"></mat-paginator>
      
     </div>
     <div *ngIf="this.temp == null">

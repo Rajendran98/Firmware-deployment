@@ -40,8 +40,21 @@ otapcommand: {
     args: {
         DeviceID: {
             type: GraphQLString
-        }
+        },
+        DeviceType:{
+            type:GraphQLString
+          }
+         
     },
     resolve: Otherotapcommand.findMatching.bind(Otherotapcommand)
+},
+otapcommandDeviceID: {
+    type,
+    args: {
+        DeviceID: {
+            type: GraphQLString
+        }
+    },
+    resolve: Otherotapcommand.getByDeviceID.bind(Otherotapcommand)
 }
 }

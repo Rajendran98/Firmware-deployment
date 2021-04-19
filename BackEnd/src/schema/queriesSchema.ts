@@ -1,6 +1,6 @@
 import { GraphQLObjectType } from 'graphql'
 
-console.log("schema queries file");
+// console.log("schema queries file");
 
 const deviceQueres=require('../Model/devicetype/queriesModels')
 const DevicepacketsummaryQuery=require('../Model/fdadevicepacketsummary/queriesModels')
@@ -56,6 +56,7 @@ module.exports = new GraphQLObjectType({
 
         otherotapcommand:otherotapcommandQuery.otherotapcommand,
         otapcommand:otherotapcommandQuery.otapcommand,
+        otapcommandDeviceID:otherotapcommandQuery.otapcommandDeviceID
         
         
 
