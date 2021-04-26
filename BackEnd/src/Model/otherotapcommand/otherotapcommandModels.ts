@@ -8,32 +8,36 @@ class Otherotapcommand extends dbqueries {
     static insert: any
     static getByID: any
     static update: any
-
+static findbyList:any
     //  Overrides TABLE_NAME with this class' backing table at MySQL
     static get TABLE_NAME() {
         return 'otherotapcommand'
     }
 
      // Returns a device by its ID
-    /**
-     * Returns a list of device  matching the passed fields
-     * @param {*} CurrentCVersion - Fields to be matched
-     */
-    static  getByDeviceID(_: any, { CurrentCVersion}: any) {
-        return  this.find( CurrentCVersion)
+    static async getByDeviceID(_: any, {DeviceID}: any) {
+        return await this.find(DeviceID)
     }
-
+static async DeviceIDlist(_:any,{DeviceID}:any){
+    // console.log("adg",DeviceID);
+    
+    return await this.findbylist(DeviceID)
+}
     /**
      * Returns a list of device  matching the passed fields
      * @param {*} fields - Fields to be matched
      */
-    static async findMatching(_: any, fields: {}) {
+   
+    static async findMatching(_: any, fields: {},args:{}) {
+        // console.log("args",fields);
+        
         // Returns early with all device if no criteria was passed
-        if (Object.keys(fields).length === 0) return this.findAll()
+        if (Object.keys(fields).length === 0) return this.findByFields()
+        
         
         // Find matching device
         return this.findByFields({
-            fields
+            fields,
         })
     }
     // Creates a new device mutations for update 

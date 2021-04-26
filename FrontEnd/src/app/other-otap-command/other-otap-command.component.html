@@ -172,17 +172,17 @@
               </mat-form-field>
              
               <mat-form-field style="width: 65%;" appearance="standard">
-                  <mat-label>SELECT COMMAND</mat-label>
-                  <mat-select name="javaV" placeholder="JAVA VERSION">
-                    
-
-                      <mat-option *ngFor="let message of messages" (click)="listed(message)" [value]="message.Name">
-                        {{message.Name}}
-                      </mat-option>
-                    
+                <mat-label>SELECT COMMAND</mat-label>
+                <mat-select name="javaV" placeholder="JAVA VERSION">
                   
-                  </mat-select>
-                </mat-form-field>
+                  <div *ngFor="let message of messages">
+                    <mat-option *ngIf="message.DeviceType == deviceType" (click)="listed(message)" [value]="message.CommandName">
+                      {{message.CommandName}}
+                    </mat-option>
+                  </div>
+                
+                </mat-select>
+              </mat-form-field>
                 <button mat-raised-button class="btn2" (click)="AddCommand()">ADD COMMAND</button>
           </div>
           </div>

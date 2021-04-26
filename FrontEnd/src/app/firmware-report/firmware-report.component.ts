@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
  
 import { ExportToCsv } from 'export-to-csv';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Apollo , QueryRef} from 'apollo-angular';
+import gql from "graphql-tag";
 
 @Component({
   selector: 'app-firmware-report',
@@ -15,7 +17,7 @@ export class FirmwareReportComponent implements OnInit {
   public searchedData
   public listArray
   public entries: object = [];
-  constructor(private router:Router, private _snackBar: MatSnackBar , private http: HttpClient) { }
+  constructor(private router:Router, private _snackBar: MatSnackBar , private http: HttpClient,private apollo: Apollo) { }
 
   ngOnInit(): void {
   }
@@ -29,17 +31,33 @@ export class FirmwareReportComponent implements OnInit {
     {
       this.listArray = val.split(',');
        console.log(this.listArray)
-          this.http.get<object>(`http://localhost:3000/devicetype/${this.listArray}`)
-        .subscribe((data) => {
-         this.entries = data;
-         console.log(this.entries)
-         this.download();
-        },
-        (error) => {
-          console.log(error)
-          this._snackBar.open("Device ID Not Found","",{duration: 2000});
-        }
-        );
+      
+       this.apollo.query({
+        query: gql`
+        query otapcommand($DeviceID:[String]){
+          otapcommand(DeviceID: $DeviceID){
+            DeviceID,
+            DeviceID
+            DeviceType
+            Customer
+            NetworkProvider
+            MobileNo
+            Model
+            VehicleTypeName
+            CurrentCVersion
+            CurrentJavaVersion
+            Ignition
+          }
+        }  
+      `,
+      variables:{
+        DeviceID: this.listArray
+      }
+      }).subscribe(result => {
+        console.log(result.data['otapcommand'])
+        this.entries = result.data['otapcommand']
+        this.download();
+      })
     }
 }
 

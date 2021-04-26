@@ -19,8 +19,8 @@ export class UpgradecommandService {
   }));
   }
 
-  IotDeviceOutBound(data){
-    return this.http.put(`${environment._deviceOutbound}/iot-stg/1.0/shadow/46952541-3269-45fb-9f93-386bbe17372d-SNM00030`, data).pipe(map(user => {
+  IotDeviceOutBound(data,deviceID){
+    return this.http.put(`${environment._deviceOutbound}/iot-stg/1.0/shadow/46952541-3269-45fb-9f93-386bbe17372d-${deviceID}`, data).pipe(map(user => {
       console.log(user);
       return user;
   }));

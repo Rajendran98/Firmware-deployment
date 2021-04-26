@@ -1,23 +1,25 @@
 const  mysql =require ('../../config/mysqlwrapper')
 export class dbqueries {
     static TABLE_NAME: any;
-    static PRIMARY_KEY: "CurrentCVersion"
+
     /**
      * This property can be overriden when the ID column is differet from 'id'
      */
-    // static get PRIMARY_KEY() {
-    //     return "DeviceID";
-    // }
+    static get PRIMARY_KEY() {
+        return "DeviceID";
+    }
 
     /**
      * Retrieves a single entry matching the passed ID
-     * @param {Array} CurrentCVersion - The entry ID
+     * @param {Number} id - The entry ID
      */
-    static find([CurrentCVersion]: any) {
-        return (mysql.createQuery({
-            query:`SELECT * FROM ?? WHERE ?? IN (??);`,
-            params: [this.TABLE_NAME,this.PRIMARY_KEY,CurrentCVersion]
-        }))
+    static async find(DeviceID: any) {
+        return (await mysql.createQuery({
+            query: `SELECT * FROM ?? WHERE ?? = ? LIMIT 1;`,
+            // query:`SELECT * FROM ?? WHERE ?? IN (??);`,
+            // query:`SELECT * FROM otherotapcommand WHERE DeviceID IN (${DeviceID})`,
+            params: [this.TABLE_NAME, this.PRIMARY_KEY, DeviceID]
+        })).shift()
     }
 
     /**
@@ -40,34 +42,36 @@ export class dbqueries {
         fields:any,
         limit:any,
         order:any
-    }) {
-        
+    })
+     {
+   
+
         let baseQuery = `SELECT * FROM ?? WHERE `
+       
 
         let params = [this.TABLE_NAME]
 
         Object.keys(fields).forEach((key, index) => {
-            baseQuery += `${key} = ?`
+            // console.log("keys",key);
+            // console.log("index",index);
+            
+            
+            baseQuery += `${key} IN (?) `
             params.push(fields[key])
-            if (index + 1 !== Object.keys(fields).length) baseQuery += " AND "
+            // if (index + 1 !== Object.keys(fields).length) baseQuery += " AND "
         })
-
-        if (order != null && order.by != null && order.direction != null) {
-            baseQuery += ` ORDER BY ??`
-            // baseQuery += order.direction === sqlConstants.DESC ? " DESC" : " ASC"
-            params.push(order.by)
-        }
-
-        if (limit != null && !isNaN(limit)) {
-            baseQuery += " LIMIT ?"
-            params.push(limit)
-        }
-
+        console.log("basequery",baseQuery);
+        console.log("params",params);
+        
+        
         return mysql.createQuery({
             query: baseQuery,
-            params
+            params,
+        
         })
-    }
+}
+       
+
 
     /**
      * Updates an entry
@@ -112,9 +116,20 @@ export class dbqueries {
             connection
         })
     }
+
+    // static async findbylist({DeviceID}:any){
+    //     return (await mysql.createQuery({
+    //         // query:`SELECT * FROM TABLE WHERE ID IN (id1, id2, ..., idn)`
+    //         query:`SELECT * FROM ?? WHERE ?? IN ("?");`,
+    //         params:[this.TABLE_NAME,this.PRIMARY_KEY,DeviceID],
+    //         // connection
+        
+
+    //     }))
+       
+    // }
+   
+
+ 
 }
-
-
-
-
 module.exports = dbqueries

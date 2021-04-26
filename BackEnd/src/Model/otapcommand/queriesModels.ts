@@ -12,6 +12,7 @@ const Otapcommand = require('../otapcommand/otapcommandModels')
 module.exports = {
     OtapCommand: {
     type: new GraphQLList(type),
+    args:{
     PacketID:{
         type:GraphQLInt
     },
@@ -24,6 +25,7 @@ module.exports = {
     // Message: {
     //     type: GraphQLString
     // },
+},
     resolve: Otapcommand.findMatching.bind(Otapcommand)
 },
 CommandOtap: {

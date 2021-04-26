@@ -12,6 +12,12 @@ const Otherotapcommand = require('./otherotapcommandModels')
 module.exports = {
     otherotapcommand: {
     type: new GraphQLList(type),
+    args: {
+        
+        DeviceID: {
+            type: new GraphQLList(GraphQLString)
+        },
+        
     Customer: {
         type: GraphQLString
     },
@@ -33,20 +39,16 @@ module.exports = {
     // Ignition: {
     //     type: GraphQLString
     // },
+},
     resolve: Otherotapcommand.findMatching.bind(Otherotapcommand)
 },
-// const otapType = new GraphQLObjectType({
-//     name: 'otap',
-//     args: {
-//       DeviceID: new GraphQLList(GraphQLString)
-//     },
-//   });
+
 otapcommand: {
     type:new GraphQLList(type),
     args: {
         // DeviceID:new GraphQLList(GraphQLString)
         DeviceID: {
-            type: new GraphQLList(GraphQLString)
+            type: GraphQLList(GraphQLString)
         },
         
         DeviceType:{
@@ -57,17 +59,31 @@ otapcommand: {
     resolve: Otherotapcommand.findMatching.bind(Otherotapcommand)
 },
 otapcommandDeviceID: {
-    type,
+    // type,
+    type:new GraphQLList(type),
     args: {
-        // DeviceID: {
-        //     type: new GraphQLList(GraphQLInt)
-        // },
-          CurrentCVersion: {
-        type:  new GraphQLList(GraphQLInt)
-        },
-      
+        DeviceID: {
+            type: new GraphQLList(GraphQLString)
+
+        }
     },
-   
-    resolve: Otherotapcommand.getByDeviceID.bind(Otherotapcommand)
-}
+    // resolve: Otherotapcommand.DeviceIDlist.bind(Otherotapcommand),
+    resolve(parent:any,args:any){
+        console.log(args);
+        
+        return Otherotapcommand.findMatching.bind(Otherotapcommand)
+
+    }
+    
+},
+// commandforotap:{
+//     // type:new GraphQLList(type),
+//     type,
+//    args:{
+//        DeviceID:{
+//         type: new GraphQLList(GraphQLString)
+//        }
+//    }
+// },
+// resolve:Otherotapcommand.findbylist.bind(Otherotapcommand)
 }

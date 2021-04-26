@@ -227,8 +227,9 @@ postMethod(files: FileList) {
 }
 parseFile(fileData) {
   fileData.map(data=> {
-    console.log(data)
+   
     this.deviceArr.push(data['Device ID'])
+    console.log(this.deviceArr)
    
   })
   this.deviceJSON = {

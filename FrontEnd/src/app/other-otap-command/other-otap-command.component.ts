@@ -117,9 +117,9 @@ export class OtherOTAPCommandComponent implements OnInit , AfterViewInit , After
         this.OnDataLoad(this.deviceType)
       });
 
-      this.UpgradecommandService.GetIotDeviceOutBound().subscribe(data => {
-        console.log(data)
-      })
+      // this.UpgradecommandService.GetIotDeviceOutBound().subscribe(data => {
+      //   console.log(data)
+      // })
     const source1$ = this.apollo.query<DataQuery1>({
       query: gql`
       {
@@ -180,7 +180,7 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
 
       this.apollo.query({
         query: gql`
-        query otapcommand($DeviceID:String){
+        query otapcommand($DeviceID:[String]){
           otapcommand(DeviceID: $DeviceID){
             DeviceID,
             DeviceID
@@ -283,8 +283,6 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
 
 
       addfile(files: FileList) {
-        
-    this.getCategory('n20')
         this.file = files.item(0);
         console.log(this.file.name)    
     let fileReader = new FileReader();    
@@ -307,10 +305,10 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
     fileData.map(data=> {
       console.log(data)
       this.deviceArr.push(data['Device ID'])
-     
+     console.log(this.deviceArr)
     })
 
-    this.getCategory('n20')
+    this.getCategory(this.deviceArr)
   }
       
       /** The label for the checkbox on the passed row */
@@ -510,12 +508,12 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
         for (const [country, capital] of Object.entries(addCommandForm.value)){
           str += capital+",";  
          }
-        this.device = "SNM00030"
+        let device = "SNM00030"
 
          let objData = Object.assign({"state": {"desired": {[this.messageName]:str}}})
 
       console.log(objData)
-         this.UpgradecommandService.IotDeviceOutBound(objData).pipe().subscribe(data => {
+         this.UpgradecommandService.IotDeviceOutBound(objData,device).pipe().subscribe(data => {
           console.log(data)
                this._snackBar.open(this.device + " Updated Successfully","",{duration: 5000});
                },
