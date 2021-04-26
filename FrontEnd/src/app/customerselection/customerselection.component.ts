@@ -87,7 +87,7 @@ this.mail = localStorage.getItem('mail')
 
 
 onNgModelChange(event){
-console.log('on ng model change', event);
+
 }
 reset(){
 this.selectedSub='';

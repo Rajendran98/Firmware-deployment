@@ -15,21 +15,21 @@ export class DevicesearchService {
 
   searchDetails() {
     return this.http.get<any>(`${environment._fwdashboard}`).pipe(map(user => {
-      console.log(user);
+     
       return user;
   }));
   }
 
   getVersionDetails() {
     return this.http.get<any>(`${environment._dashboard}`).pipe(map(user => {
-      console.log(user);
+     
       return user;
   }));
   }
 
   devicePagination(page){
     return this.http.get<any>(`${environment._deviceWithPagination}`+page+``).pipe(map(user => {
-      console.log(user);
+     
       return user;
   }));
   }
@@ -37,7 +37,7 @@ export class DevicesearchService {
  
   PublishedVersion(data) {
     return this.http.put<object>(`${environment._publishVersion}`, data).pipe(map(user => {
-      console.log(user);
+     
       return user;
   }));
   }

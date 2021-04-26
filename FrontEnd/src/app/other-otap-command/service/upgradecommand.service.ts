@@ -14,14 +14,14 @@ export class UpgradecommandService {
 
   PublishedVersion(data) {
     return this.http.post<object>(`${environment._publishVersion}`, data).pipe(map(user => {
-      console.log(user);
+     
       return user;
   }));
   }
 
   IotDeviceOutBound(data,deviceID){
     return this.http.put(`${environment._deviceOutbound}/iot-stg/1.0/shadow/46952541-3269-45fb-9f93-386bbe17372d-${deviceID}`, data).pipe(map(user => {
-      console.log(user);
+      
       return user;
   }));
   }
@@ -32,7 +32,7 @@ export class UpgradecommandService {
     })
 
     return this.http.get<any>(`${environment._getDevice}`,{ headers: headers }).pipe(map(user => {
-      console.log(user);
+     
       return user;
   }));
   }

@@ -17,7 +17,7 @@ export class DeviceSearchComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.deviceType = params['device'];
       localStorage.setItem('deviceType',this.deviceType)
-      console.log(this.deviceType)
+     
     });
   }
 

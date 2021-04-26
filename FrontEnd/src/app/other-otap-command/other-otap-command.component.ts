@@ -112,8 +112,7 @@ export class OtherOTAPCommandComponent implements OnInit , AfterViewInit , After
     ngOnInit(): void {
       this.route.params.subscribe(params => {
         this.deviceType = params['device'];
-        console.log(this.deviceType)
-        
+      
         this.OnDataLoad(this.deviceType)
       });
 
@@ -143,7 +142,7 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
     removeFunction(){
       const filterVal = "TAP66"
       this.dataSource.filter = filterVal.trim().toLocaleLowerCase() 
-      console.log(this.dataSource)
+     
     }
 
     public OnDataLoad  = (devicetypes) =>{
@@ -169,7 +168,7 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
     DeviceType: this.deviceType
   }
   }).subscribe(result => {
-    console.log(result.data['otapcommand'])
+   
     this.dataSource = new MatTableDataSource(result.data['otapcommand'])
    this.dataSource ? this.loadingFlag = false : this.loadingFlag = true;
         this.temp = this.dataSource.data.length;
@@ -245,7 +244,7 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
   
   
     changeTab(event) {
-      console.log(this.id)
+     
       this.tabIndex = event.index;
     }
 
@@ -260,7 +259,7 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
         // this.router.navigate(['Firmware']);
         const filterVal = "n20"
         this.dataSource.filter = filterVal.trim().toLocaleLowerCase() 
-        console.log(this.dataSource)
+       
       }
 
       private isAllSelected() {
@@ -272,11 +271,11 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
       toggleRow(row: any, index: number) {
         this.selection.toggle(row);
         this.exporter.toggleRow(index);
-        console.log(row)
+        
         for (const [key, value] of Object.entries(row)) {
           if(key == "DeviceID"){
             this.device = value
-            console.log(this.device)
+           
           }
         }
       }
@@ -284,7 +283,7 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
 
       addfile(files: FileList) {
         this.file = files.item(0);
-        console.log(this.file.name)    
+      
     let fileReader = new FileReader();    
     fileReader.readAsArrayBuffer(this.file);     
     fileReader.onload = (e) => {    
@@ -303,9 +302,9 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
 
   parseFile(fileData) {
     fileData.map(data=> {
-      console.log(data)
+     
       this.deviceArr.push(data['Device ID'])
-     console.log(this.deviceArr)
+    
     })
 
     this.getCategory(this.deviceArr)
@@ -323,7 +322,7 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
       
 
       listed(version){
-        console.log(version)
+       
         for (const [key, value] of Object.entries(version)) {
 
           if(key == "MessageFormat"){
@@ -414,7 +413,7 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
 
     AddCommand(addCommandForm: NgForm){
       if(addCommandForm.valid){
-        console.log(addCommandForm.value)
+       
 
         this.apollo.mutate({
           mutation: UPVOTE_POST,
@@ -466,7 +465,7 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
        this.packetId = data.packetId
        this.deviceType = data.deviceType
         let jsonObject = JSON.parse(this.json);
-        console.log(jsonObject)
+       
         for (let country of Object.keys(jsonObject)) {
           var capital = jsonObject[country];
           
@@ -493,9 +492,9 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
        
       //  console.log(oops) "NJ042612"
         let objData = Object.assign({update: [{Device: "NG356545", DeviceID: 351431 , MessageFormat: oops, FirmwareUpgradeEnum: this.packetId , IOTDevice: "" , MessageName: this.messageName , AppInstanceID: null , DeviceGateway: "TDMG" , UserID: 2739}]});
-        console.log(objData)
+       
         this.UpgradecommandService.PublishedVersion(objData).pipe().subscribe(data=>{
-            console.log(data)
+           
             this._snackBar.open(this.device + " Updated Successfully","",{duration: 5000});
             },
             (error) => this._snackBar.open("DeviceID Mismatch","",{duration: 5000})
@@ -512,9 +511,9 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
 
          let objData = Object.assign({"state": {"desired": {[this.messageName]:str}}})
 
-      console.log(objData)
+     
          this.UpgradecommandService.IotDeviceOutBound(objData,device).pipe().subscribe(data => {
-          console.log(data)
+          
                this._snackBar.open(this.device + " Updated Successfully","",{duration: 5000});
                },
                (error) => this._snackBar.open("DeviceID Mismatch","",{duration: 5000})

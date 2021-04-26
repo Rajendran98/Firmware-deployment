@@ -13,13 +13,13 @@ export class OutboundService {
 
   outbound() {
     return this.http.get<any>(`${environment._outboundapi}`).pipe(map(user => {
-      console.log(user);
+     
       return user;
   }));
   }
   multipleDevice(deviceList) {
     return this.http.post<any>(`${environment._multipleDeviceapi}`,deviceList).pipe(map(user => {
-      console.log(user);
+     
       return user;
   }));
   }

@@ -30,7 +30,7 @@ export class FirmwareReportComponent implements OnInit {
     if(val != undefined)
     {
       this.listArray = val.split(',');
-       console.log(this.listArray)
+     
       
        this.apollo.query({
         query: gql`
@@ -54,7 +54,7 @@ export class FirmwareReportComponent implements OnInit {
         DeviceID: this.listArray
       }
       }).subscribe(result => {
-        console.log(result.data['otapcommand'])
+       
         this.entries = result.data['otapcommand']
         this.download();
       })

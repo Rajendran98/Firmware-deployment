@@ -227,10 +227,10 @@ ngAfterViewInit() {
 
   entriesPost(page){
    
-    console.log(page)
+   
     this.DevicesearchService.devicePagination(page).subscribe(
       data => {
-        console.log(data)
+       
         this.entries = data
         function* entries(obj) {
           for (let key of Object.keys(obj)) {
@@ -241,7 +241,7 @@ ngAfterViewInit() {
        for (let [key1, value1] of entries(this.entries)) {
         if(key1 == "totalCount"){
           this.totalCount = value1
-          console.log(this.totalCount)
+         
         }
          if(key1 == "result"){
             this.dataSource = new MatTableDataSource(value1)
@@ -313,13 +313,12 @@ private isAllSelected() {
 
 toggleRow(row: any, index: number) {
   this.selection.toggle(row);
-  console.log(row)
+ 
   for (const [key, value] of Object.entries(row)) {
     if(key == "deviceId")
     {
       this.Device = value
-      console.log(this.Device)
-
+     
     }
    
   }
@@ -346,7 +345,7 @@ checkboxLabel(row?: any): string {
   }
 
   listed(version){
-    console.log(version)
+   
     for (const [key, value] of Object.entries(version)) {
       if(key == "Name")
       {
@@ -364,7 +363,7 @@ checkboxLabel(row?: any): string {
       {
         this.FileSize = value
         
-    console.log(this.FileSize)
+   
       }
       if(key == "Port"){
         this.Port= value;
@@ -391,9 +390,9 @@ checkboxLabel(row?: any): string {
     {
       let objData = Object.assign({update: [{Device: this.Device , DeviceID: 351431 , CVersion: this.version , JavaVersion: "", ServerIP: this.ServerIP , FilePath: this.FilePath , FileSize: this.FileSize , FirmwareVersion: this.version , FirmwareType: 0 , Port: this.Port , UserName: this.UserName , Password: this.Password , FirmwareUpgradeEnum: 34 , APN: this.APN , AppInstanceID: null , UserID: "2739" , Internal: false , DeviceGateway: "TDMG" , IOTDevice: ""}]})
     
-      console.log(objData)
+  
       this.DevicesearchService.PublishedVersion(objData).pipe().subscribe(data=>{
-        console.log(data)
+      
       this._snackBar.open(this.Device + " Updated Successfully","",{duration: 5000});
         })
       

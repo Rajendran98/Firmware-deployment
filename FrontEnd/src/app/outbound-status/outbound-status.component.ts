@@ -62,13 +62,12 @@ export class OutboundStatusComponent implements OnInit , AfterViewInit , AfterCo
      }
 
      for (let [key1, value1] of entries(this.entries)) {
-      //  console.log(key1);
-        //console.log(value1);
+     
         if(key1 == 'result'){
-          console.log(value1);
+        
           this.listData = new MatTableDataSource(value1)
           this.listData ? this.loadingFlag = false : this.loadingFlag = true;
-          console.log(this.listData.data.length)
+         
           this.temp = this.listData.data.length;
         }
 
@@ -127,7 +126,7 @@ export class OutboundStatusComponent implements OnInit , AfterViewInit , AfterCo
     changeTab(event) {
      
       this.tabIndex = event.index;
-      console.log(this.tabIndex)
+     
     }
 
 
@@ -209,7 +208,7 @@ postMethod(files: FileList) {
     }
     addfile(files: FileList) {
       this.file = files.item(0);
-      console.log(this.file.name)    
+       
   let fileReader = new FileReader();    
   fileReader.readAsArrayBuffer(this.file);     
   fileReader.onload = (e) => {    
@@ -229,7 +228,6 @@ parseFile(fileData) {
   fileData.map(data=> {
    
     this.deviceArr.push(data['Device ID'])
-    console.log(this.deviceArr)
    
   })
   this.deviceJSON = {
@@ -245,19 +243,18 @@ parseFile(fileData) {
    }
 
    for (let [key1, value1] of entries1(this.entries1)) {
-    //  console.log(key1);
-      //console.log(value1);
+    
       if(key1 == 'result'){
        
         this.listData1 = new MatTableDataSource(value1)
         this.listData1 ? this.loadingFlag1 = false : this.loadingFlag1 = true;
         setTimeout(() => this.listData1.paginator = this.paginator);
         this.temp1 = this.listData1.data.length;
-        console.log(this.listData1)
+       
       }
 
     }
-    console.log(data);
+    
   })
 }
 
@@ -274,7 +271,7 @@ masterToggle() {
   
     updateCheckedList(element)
     {
-      console.log(element);
+      
     }
 
 
