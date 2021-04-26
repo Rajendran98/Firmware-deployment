@@ -28,7 +28,7 @@ export class FirmwareReportComponent implements OnInit {
     if(val != undefined)
     {
       this.listArray = val.split(',');
-      //  console.log(this.listArray)
+       console.log(this.listArray)
           this.http.get<object>(`http://localhost:3000/devicetype/${this.listArray}`)
         .subscribe((data) => {
          this.entries = data;

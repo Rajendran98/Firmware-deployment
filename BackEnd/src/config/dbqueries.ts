@@ -53,7 +53,7 @@ export class dbqueries {
         order:any
     }) {
         
-        let baseQuery = `SELECT * FROM ?? WHERE `
+        let baseQuery = `SELECT * FROM ?? WHERE IN ??`
 
         let params = [this.TABLE_NAME]
 

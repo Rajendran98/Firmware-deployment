@@ -1,4 +1,12 @@
 {
+  "/api7": {
+    "target": "https://api-stg.trimble.com/t/trimble.com/iot-stg/1.0/shadow/46952541-3269-45fb-9f93-386bbe17372d-SNM00030",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+    "^/api7": ""
+    }
+    },
   "/api6": {
     "target": "https://identity-stg.trimble.com/token?grant_type=client_credentials",
     "secure": true,

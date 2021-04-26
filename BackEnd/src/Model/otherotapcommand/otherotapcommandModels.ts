@@ -15,8 +15,12 @@ class Otherotapcommand extends dbqueries {
     }
 
      // Returns a device by its ID
-    static async getByDeviceID(_: any, {DeviceID}: any) {
-        return await this.find(DeviceID)
+    /**
+     * Returns a list of device  matching the passed fields
+     * @param {*} CurrentCVersion - Fields to be matched
+     */
+    static  getByDeviceID(_: any, { CurrentCVersion}: any) {
+        return  this.find( CurrentCVersion)
     }
 
     /**

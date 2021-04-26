@@ -163,7 +163,7 @@ query$: Observable<devicetype[]>;
 
 
 exit(){
-  setTimeout(() =>  location.reload())
+  setTimeout(() =>  location.reload(),100)
 }
     
 }

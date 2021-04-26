@@ -1,24 +1,23 @@
 const  mysql =require ('../../config/mysqlwrapper')
 export class dbqueries {
     static TABLE_NAME: any;
-
+    static PRIMARY_KEY: "CurrentCVersion"
     /**
      * This property can be overriden when the ID column is differet from 'id'
      */
-    static get PRIMARY_KEY() {
-        return "DeviceID";
-    }
+    // static get PRIMARY_KEY() {
+    //     return "DeviceID";
+    // }
 
     /**
      * Retrieves a single entry matching the passed ID
-     * @param {Number} id - The entry ID
+     * @param {Array} CurrentCVersion - The entry ID
      */
-    static async find(DeviceID: any) {
-        return (await mysql.createQuery({
-            // query: `SELECT * FROM ?? WHERE ?? = ? LIMIT 1;`,
-            query:`SELECT * FROM otherotapcommand WHERE DeviceID IN (${DeviceID})`,
-            params: [this.TABLE_NAME, this.PRIMARY_KEY, DeviceID]
-        })).shift()
+    static find([CurrentCVersion]: any) {
+        return (mysql.createQuery({
+            query:`SELECT * FROM ?? WHERE ?? IN (??);`,
+            params: [this.TABLE_NAME,this.PRIMARY_KEY,CurrentCVersion]
+        }))
     }
 
     /**

@@ -27,9 +27,11 @@ export class AuthenticationService {
     loginUser(loginData) {
       let headers = new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
-      //  'Authorization': 'Basic V2ZJNjlCSVN4NlhzcVB2UVJrRFlJZTVZU3lRYTpmMVhBcjFrVmdkQW00a01mU1lNYzNNQUdtaUlh'}); 
-      'Authorization': 'Basic dzhxZTYxaTZrT0J5MVFobE5PUUVodGRLOUpzYTpYcFdEVVF4R3hfd2ZFb25EeGw4REhJN2s0Y0Fh'});
-        // 'Authorization': 'Basic aHdmaXRqQlQ1bGVvWm9qeFZ4SzRnMlpwM0FFYTpNMDYzbDdZSk5TRzBrUVBwS3BKVEVDcmNPNElh'});
+      //  'Authorization': 'Basic V2ZJNjlCSVN4NlhzcVB2UVJrRFlJZTVZU3lRYTpmMVhBcjFrVmdkQW00a01mU1lNYzNNQUdtaUlh'}); //single device search
+     // 'Authorization': 'Basic dzhxZTYxaTZrT0J5MVFobE5PUUVodGRLOUpzYTpYcFdEVVF4R3hfd2ZFb25EeGw4REhJN2s0Y0Fh'});    //C and java firmware upload          
+        // 'Authorization': 'Basic aHdmaXRqQlQ1bGVvWm9qeFZ4SzRnMlpwM0FFYTpNMDYzbDdZSk5TRzBrUVBwS3BKVEVDcmNPNElh'}); // Upload Firmware
+         // 'Authorization': 'Basic SkpwUnNKY0JneFVxMVhMcFZnejhFb0I1TFZBYTo5Uzl1MVNmUUQ0MV8wYVF4a1FjSTJxa1Z3Nm9h'}); //Outbound
+          'Authorization': 'Basic U2EzOW42cnQxREY5ekxZSXNIWFJoT2dWUlhjYTpaVEp5SWZmRkFBamc3cTlRNGxOaVZTbFd4Wjhh'}); //IotOutBound 
         let options = { headers: headers };
     
       return this.http.post<any>(`${environment._loginProdUrl}`,loginData,options).pipe(map(user => {

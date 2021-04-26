@@ -13,7 +13,10 @@ import {
 module.exports = new GraphQLObjectType({
     name: 'Otherotapcommand',
     description: 'a otherotapcommand',
-    fields: {
+    fields:() =>({
+        // args:{
+        //     DeviceID:new GraphQLNonNull(GraphQLString)
+        // },
         DeviceID: {
             type: new GraphQLNonNull(GraphQLString)
         },
@@ -44,5 +47,5 @@ module.exports = new GraphQLObjectType({
         Ignition: {
             type: new GraphQLNonNull(GraphQLString)
         }
-    }
+    })
 })

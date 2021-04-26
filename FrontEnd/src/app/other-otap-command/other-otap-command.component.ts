@@ -116,6 +116,10 @@ export class OtherOTAPCommandComponent implements OnInit , AfterViewInit , After
         
         this.OnDataLoad(this.deviceType)
       });
+
+      this.UpgradecommandService.GetIotDeviceOutBound().subscribe(data => {
+        console.log(data)
+      })
     const source1$ = this.apollo.query<DataQuery1>({
       query: gql`
       {
@@ -506,21 +510,27 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
         for (const [country, capital] of Object.entries(addCommandForm.value)){
           str += capital+",";  
          }
-        
+        this.device = "SNM00030"
 
-         let objData = Object.assign({"state": {"desired": {"S01":str}}})
-         let oops = JSON.stringify(objData);
+         let objData = Object.assign({"state": {"desired": {[this.messageName]:str}}})
+
+      console.log(objData)
+         this.UpgradecommandService.IotDeviceOutBound(objData).pipe().subscribe(data => {
+          console.log(data)
+               this._snackBar.open(this.device + " Updated Successfully","",{duration: 5000});
+               },
+               (error) => this._snackBar.open("DeviceID Mismatch","",{duration: 5000})
+               )
          
-
-
-         let objData1 = Object.assign({update: [{Device: "NG356545", DeviceID: 351431 , MessageFormat: oops, FirmwareUpgradeEnum: this.packetId , IOTDevice: "" , MessageName: this.messageName , AppInstanceID: null , DeviceGateway: "TDMG" , UserID: 2739}]});
-         console.log(objData1)
-         this.UpgradecommandService.PublishedVersion(objData1).pipe().subscribe(data=>{
-             console.log(data)
-             this._snackBar.open(this.device + " Updated Successfully","",{duration: 5000});
-             },
-             (error) => this._snackBar.open("DeviceID Mismatch","",{duration: 5000})
-             )
+        //  let oops = JSON.stringify(objData);
+        //  let objData1 = Object.assign({DeviceType:this.deviceType, update: [{Device: "SNM00032", DeviceID: 351431 , MessageFormat: oops, FirmwareUpgradeEnum: this.packetId , IOTDevice: "" , MessageName: this.messageName, UserID: 2739}]});
+        //  console.log(objData1)
+        //  this.UpgradecommandService.PublishedVersion(objData1).pipe().subscribe(data=>{
+        //      console.log(data)
+        //      this._snackBar.open(this.device + " Updated Successfully","",{duration: 5000});
+        //      },
+        //      (error) => this._snackBar.open("DeviceID Mismatch","",{duration: 5000})
+        //      )
       }
     }
      

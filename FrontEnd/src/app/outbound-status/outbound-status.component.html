@@ -143,6 +143,34 @@
 
 
 <div *ngIf="tabIndex === 1 && !loadingFlag1" >
+  <mat-card style="margin: 20px;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-8 cleft">
+                <p>Single device search option is used to searched device status</p>
+                <div class="example-container" >
+                <mat-form-field style="width: 80%;" appearance="outline">
+                   
+                    <input style="text-indent: 2em;" matInput [(ngModel)]="searchKey" (keyup)="applyFilter()" placeholder="Search Device" #input>  
+                     <mat-icon style="color: gray;" matPrefix>search</mat-icon>
+                   
+                </mat-form-field>
+                <button (click)="exporter.exportTable('xlsx', {fileName: 'Outbound Status Report'})" mat-raised-button class="btn">SUBMIT</button>
+                
+            </div>
+            </div>
+            <div class="col-sm-4">
+               
+           
+              <button (click)="exporter.exportTable('xlsx', {fileName: 'Outbound Status Report'})" mat-raised-button class="btn1">DATA DOWNLOAD</button>
+                
+                  
+              </div>
+              </div>
+          </div>
+      
+
+  </mat-card>
   <table mat-table matTableExporter [dataSource]="listData1" matSort id="excel-table" class="mat-elevation-z8" #exporter="matTableExporter">
 
     <ng-container matColumnDef="select">

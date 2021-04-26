@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  _loginUrl : "api5",
-  _loginStg: "api6",
-  _loginProdUrl: "https://identity-stg.trimble.com/token?grant_type=client_credentials&amp;scope=openid",
-  _outboundapi : "https://api.trimble.com/t/trimble.com/oem-devicegateway/1.0/outbound/NH519298?limit=3&page=1&sort=desc",
+  _loginUrl : "api5",//Outbound,Upload Firmware
+  _loginStg: "api6",//single Device search
+  _loginProdUrl: "https://identity-stg.trimble.com/token?grant_type=client_credentials&amp;scope=openid", //Other OTAP Command , Upolad C and Java
+  _outboundapi : "https://api.trimble.com/t/trimble.com/oem-devicegateway/1.0/outbound/NH519298?limit=10&page=1&sort=desc",
   _multipleDeviceapi: "https://api.trimble.com/t/trimble.com/oem-devicegateway/1.0/outbound/messages",
   _deviceWithPagination: "https://api-stg.trimble.com/t/trimble.com/oemdeviceinfo-api/1.0/deviceInfo/firmware",
   _firmwareUpload: "api1",
@@ -15,6 +15,8 @@ export const environment = {
   _dashboard: "api2",
   _publishVersion: "api3",
   _firmwareFileUpload: "api4",
+  _deviceOutbound: "api7",
+  _getDevice: "https://api-stg.trimble.com/t/trimble.com/iot-stg/1.0/shadow/46952541-3269-45fb-9f93-386bbe17372d-SNM00030"
   
 };
 
