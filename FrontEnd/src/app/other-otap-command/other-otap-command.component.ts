@@ -256,9 +256,9 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
       }
       }
       dash(){
-        // this.router.navigate(['Firmware']);
-        const filterVal = "n20"
-        this.dataSource.filter = filterVal.trim().toLocaleLowerCase() 
+        this.router.navigate(['Firmware']);
+        // const filterVal = "n20"
+        // this.dataSource.filter = filterVal.trim().toLocaleLowerCase() 
        
       }
 

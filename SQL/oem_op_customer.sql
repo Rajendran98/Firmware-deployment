@@ -16,6 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `customer`
+--
+
+DROP TABLE IF EXISTS `customer`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `customer` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `Name` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `fk_CustomerTypeId` int DEFAULT NULL,
+  `InsertUTC` datetime DEFAULT CURRENT_TIMESTAMP,
+  `UpdateUTC` datetime DEFAULT NULL,
+  `IsActive` tinyint(1) DEFAULT '1',
+  `fk_OEMID` int DEFAULT NULL,
+  `ParentCustomerID` int NOT NULL,
+  `CustomerCode` varchar(250) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `Customer_CustomerType_FK` (`fk_CustomerTypeId`),
+  CONSTRAINT `Customer_CustomerType_FK` FOREIGN KEY (`fk_CustomerTypeId`) REFERENCES `customertype` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=422176 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `customer`
 --
 
@@ -34,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-29 15:43:57
+-- Dump completed on 2021-04-27 16:13:18

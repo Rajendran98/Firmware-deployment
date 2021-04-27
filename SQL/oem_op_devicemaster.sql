@@ -16,6 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `devicemaster`
+--
+
+DROP TABLE IF EXISTS `devicemaster`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `devicemaster` (
+  `DeviceID` int unsigned NOT NULL AUTO_INCREMENT,
+  `GPSDeviceID` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `InsertUTC` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `UpdateUTC` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `fk_FirmwareInfoID` int DEFAULT NULL,
+  `fk_DeviceTypeID` int DEFAULT NULL,
+  `fk_NetworkProviderID` int DEFAULT NULL,
+  PRIMARY KEY (`DeviceID`),
+  UNIQUE KEY `DM_GPSDeviceID_UK` (`GPSDeviceID`),
+  KEY `DM_DeviceFirmwareInfo_FK` (`fk_FirmwareInfoID`),
+  KEY `DM_DeviceType_FK` (`fk_DeviceTypeID`),
+  KEY `DM_NetworkProvider_FK` (`fk_NetworkProviderID`),
+  CONSTRAINT `DM_DeviceFirmwareInfo_FK` FOREIGN KEY (`fk_FirmwareInfoID`) REFERENCES `devicefirmwareinfo` (`ID`),
+  CONSTRAINT `DM_DeviceType_FK` FOREIGN KEY (`fk_DeviceTypeID`) REFERENCES `devicetype` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=115838 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `devicemaster`
 --
 
@@ -34,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-29 15:43:52
+-- Dump completed on 2021-04-27 16:13:18

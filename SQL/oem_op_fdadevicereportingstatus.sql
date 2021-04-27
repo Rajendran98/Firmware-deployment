@@ -16,6 +16,85 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `fdadevicereportingstatus`
+--
+
+DROP TABLE IF EXISTS `fdadevicereportingstatus`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `fdadevicereportingstatus` (
+  `ID` bigint NOT NULL AUTO_INCREMENT,
+  `DeviceId` varchar(128) NOT NULL,
+  `packetsequenceno` varchar(128) DEFAULT NULL,
+  `imei` varchar(128) DEFAULT NULL,
+  `LastReportedPacket` varchar(128) DEFAULT NULL,
+  `msg_sl_no` varchar(128) DEFAULT NULL,
+  `Pfreqency` varchar(128) DEFAULT NULL,
+  `LastReportedDate` datetime DEFAULT NULL,
+  `TimestampLocal` varchar(128) DEFAULT NULL,
+  `PublishUTC` varchar(128) DEFAULT NULL,
+  `lat` varchar(128) DEFAULT NULL,
+  `lon` varchar(128) DEFAULT NULL,
+  `altitude` varchar(128) DEFAULT NULL,
+  `heading` varchar(128) DEFAULT NULL,
+  `gpsspeed` varchar(128) DEFAULT NULL,
+  `no_of_satellites` varchar(128) DEFAULT NULL,
+  `location` varchar(999) DEFAULT NULL,
+  `gpsodometer` varchar(128) DEFAULT NULL,
+  `AvgAccelerometerX` varchar(128) DEFAULT NULL,
+  `AvgAccelerometerY` varchar(128) DEFAULT NULL,
+  `AvgAccelerometerZ` varchar(128) DEFAULT NULL,
+  `fw_ver` varchar(128) DEFAULT NULL,
+  `vehicle_type` varchar(128) DEFAULT NULL,
+  `vehicle_type_description` varchar(128) DEFAULT NULL,
+  `VIN` varchar(128) DEFAULT NULL,
+  `SubscriptionEndDate` varchar(128) DEFAULT NULL,
+  `Elevation` varchar(128) DEFAULT NULL,
+  `Frequency_from_W` varchar(128) DEFAULT NULL,
+  `ign_status` varchar(128) DEFAULT NULL,
+  `vehicle_battery_potential` varchar(128) DEFAULT NULL,
+  `obu_batt_volt` varchar(128) DEFAULT NULL,
+  `fuellevel` varchar(128) DEFAULT NULL,
+  `device_fuel_level` varchar(128) DEFAULT NULL,
+  `wheel_based_speed` varchar(128) DEFAULT NULL,
+  `enginespeed` varchar(128) DEFAULT NULL,
+  `device_engine_speed` varchar(128) DEFAULT NULL,
+  `enginecoolanttemperature` varchar(128) DEFAULT NULL,
+  `FuelConsumption` varchar(128) DEFAULT NULL,
+  `ThrottlePosition` varchar(128) DEFAULT NULL,
+  `Engine_Torque` varchar(128) DEFAULT NULL,
+  `EngineHours` varchar(128) DEFAULT NULL,
+  `FrictionalTorque` varchar(128) DEFAULT NULL,
+  `engine_oil_pressure` varchar(128) DEFAULT NULL,
+  `ClutchSwitch` varchar(128) DEFAULT NULL,
+  `BrakeSwitch` varchar(128) DEFAULT NULL,
+  `VehicleDistance` varchar(128) DEFAULT NULL,
+  `EngineOilTemperature` varchar(128) DEFAULT NULL,
+  `EngineIntakePressure_1` varchar(128) DEFAULT NULL,
+  `EngineIntakeTemperature_1` varchar(128) DEFAULT NULL,
+  `EngineAirInletPressure` varchar(128) DEFAULT NULL,
+  `BarometricPressure` varchar(128) DEFAULT NULL,
+  `EngineFuelTemperature_1` varchar(128) DEFAULT NULL,
+  `DriversDemandEnginePercentTorque` varchar(128) DEFAULT NULL,
+  `BatteryChargingCurrent` varchar(128) DEFAULT NULL,
+  `AirPressure_1` varchar(128) DEFAULT NULL,
+  `AirPressure_2` varchar(128) DEFAULT NULL,
+  `DistanceToEmpty` varchar(128) DEFAULT NULL,
+  `GSASCompliance` varchar(128) DEFAULT NULL,
+  `AirPressureDigital` varchar(128) DEFAULT NULL,
+  `OilPressureDigital` varchar(128) DEFAULT NULL,
+  `gsm_signal` varchar(128) DEFAULT NULL,
+  `alertid` varchar(128) DEFAULT NULL,
+  `Silent` int DEFAULT NULL,
+  `ReportGeneratedDate` int DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `ReportGeneratedDate` (`ReportGeneratedDate`,`DeviceId`),
+  KEY `alertid` (`alertid`,`DeviceId`),
+  KEY `alertid_2` (`alertid`,`DeviceId`)
+) ENGINE=InnoDB AUTO_INCREMENT=146964955 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `fdadevicereportingstatus`
 --
 
@@ -34,4 +113,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-29 15:43:40
+-- Dump completed on 2021-04-27 16:13:18

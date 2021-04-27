@@ -21,7 +21,7 @@ Firmware -> FrontEnd
 
 npm install
 
-ng serve
+npm run start
 
 ## To Run BackEnd
 

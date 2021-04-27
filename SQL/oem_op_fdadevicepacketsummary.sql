@@ -16,6 +16,63 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `fdadevicepacketsummary`
+--
+
+DROP TABLE IF EXISTS `fdadevicepacketsummary`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `fdadevicepacketsummary` (
+  `ID` bigint NOT NULL AUTO_INCREMENT,
+  `DeviceId` varchar(100) NOT NULL,
+  `VIN` varchar(128) DEFAULT NULL,
+  `Customer` varchar(100) DEFAULT NULL,
+  `VehicleType` varchar(128) DEFAULT NULL,
+  `TankCapacity` double DEFAULT NULL,
+  `fk_GroupClusterID` int DEFAULT NULL,
+  `StartDate` datetime DEFAULT NULL,
+  `EndDate` datetime DEFAULT NULL,
+  `TriggerFlag` varchar(100) DEFAULT NULL,
+  `PlantName` varchar(100) DEFAULT NULL,
+  `fw_version` varchar(999) DEFAULT NULL,
+  `Total` int DEFAULT NULL,
+  `D0` int DEFAULT NULL,
+  `D` int DEFAULT NULL,
+  `P` int DEFAULT NULL,
+  `A` int DEFAULT NULL,
+  `V` int DEFAULT NULL,
+  `F0` int DEFAULT NULL,
+  `FD` int DEFAULT NULL,
+  `FE` int DEFAULT NULL,
+  `FF` int DEFAULT NULL,
+  `Published` int DEFAULT NULL,
+  `NotPublished` int DEFAULT NULL,
+  `D0_NotPublished` int DEFAULT NULL,
+  `D0_Published` int DEFAULT NULL,
+  `F0_NotPublished` int DEFAULT NULL,
+  `F0_Published` int DEFAULT NULL,
+  `E0_NotPublished` int DEFAULT NULL,
+  `E0_Published` int DEFAULT NULL,
+  `E5_NotPublished` int DEFAULT NULL,
+  `E5_Published` int DEFAULT NULL,
+  `Pfreqency` varchar(128) DEFAULT NULL,
+  `lat` varchar(128) DEFAULT NULL,
+  `location` varchar(999) DEFAULT NULL,
+  `VehicleBatteryPotential` varchar(128) DEFAULT NULL,
+  `ObuBattVolt` varchar(128) DEFAULT NULL,
+  `lon` varchar(128) DEFAULT NULL,
+  `Silent` int DEFAULT NULL,
+  `LastReportedDate` datetime DEFAULT NULL,
+  `DaysPastStartDate` int DEFAULT NULL,
+  `DeviceStatus` varchar(128) DEFAULT NULL,
+  `ageing` varchar(128) DEFAULT NULL,
+  `ReportGeneratedDate` int DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `IDX_ReportGeneratedDate` (`ReportGeneratedDate`)
+) ENGINE=InnoDB AUTO_INCREMENT=43081174 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `fdadevicepacketsummary`
 --
 
@@ -34,4 +91,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-29 15:43:38
+-- Dump completed on 2021-04-27 16:13:20

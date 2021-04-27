@@ -16,6 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `customeraccountrelationship`
+--
+
+DROP TABLE IF EXISTS `customeraccountrelationship`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `customeraccountrelationship` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `AccountName` varchar(200) DEFAULT NULL,
+  `fk_DealerId` int NOT NULL,
+  `fk_CustomerId` int NOT NULL,
+  `BSSID` varchar(100) NOT NULL,
+  `InsertUTC` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `UC_BSSID` (`BSSID`),
+  KEY `Customer_CustomerAccountRelationship_FK_Cust` (`fk_CustomerId`),
+  KEY `Customer_CustomerAccountRelationship_FK_Dealer` (`fk_DealerId`),
+  CONSTRAINT `Customer_CustomerAccountRelationship_Dealer_FK` FOREIGN KEY (`fk_DealerId`) REFERENCES `customer` (`ID`),
+  CONSTRAINT `Customer_CustomerAccountRelationship_FK_` FOREIGN KEY (`fk_CustomerId`) REFERENCES `customer` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=12855 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `customeraccountrelationship`
 --
 
@@ -34,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-29 15:43:48
+-- Dump completed on 2021-04-27 16:13:19
