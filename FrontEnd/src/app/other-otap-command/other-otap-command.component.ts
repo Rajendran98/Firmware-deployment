@@ -156,6 +156,7 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
         Customer
         NetworkProvider
         Model
+        MobileNo
         VehicleTypeName
         Model
         CurrentCVersion
@@ -275,6 +276,7 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
         for (const [key, value] of Object.entries(row)) {
           if(key == "DeviceID"){
             this.device = value
+          
            
           }
         }
@@ -350,15 +352,23 @@ source1$.pipe(map(result => result.data && result.data.OtapCommand)).subscribe((
 
       PostData(){
 
-        const dialogRef = this.dialog.open(flashFirmware, {
-          width: '400px',
-          data: {message:this.messageFormat,messagename: this.messageName ,Device: this.device,packetId: this.packetId,deviceType:this.deviceType}
-        });
+         if(this.device == undefined || this.messageName == undefined)
+        {
+          this._snackBar.open("Select Command and CheckBox To Upgrade Command","",{duration: 5000});
+        }
+
+        else{
+          const dialogRef = this.dialog.open(flashFirmware, {
+            width: '400px',
+            data: {message:this.messageFormat,messagename: this.messageName ,Device: this.device,packetId: this.packetId,deviceType:this.deviceType}
+          });
+      
+         dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+   
+          });
+        }
     
-       dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed');
- 
-        });
         // if(this.device == undefined || this.messageName == undefined)
         // {
         //   this._snackBar.open("Select Command and CheckBox To Upgrade Command","",{duration: 5000});

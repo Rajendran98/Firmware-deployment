@@ -25,14 +25,12 @@ DROP TABLE IF EXISTS `otapcommand`;
 CREATE TABLE `otapcommand` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `PacketID` int NOT NULL,
-  `DeviceType` int NOT NULL,
+  `DeviceType` varchar(100) NOT NULL,
   `CommandName` varchar(100) NOT NULL,
   `MessageFormat` longtext NOT NULL,
   PRIMARY KEY (`ID`,`PacketID`),
-  UNIQUE KEY `PacketID_UNIQUE` (`PacketID`),
-  KEY `DeviceType_idx` (`DeviceType`),
-  CONSTRAINT `DeviceType` FOREIGN KEY (`DeviceType`) REFERENCES `devicetype` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+  UNIQUE KEY `PacketID_UNIQUE` (`PacketID`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +39,7 @@ CREATE TABLE `otapcommand` (
 
 LOCK TABLES `otapcommand` WRITE;
 /*!40000 ALTER TABLE `otapcommand` DISABLE KEYS */;
-INSERT INTO `otapcommand` VALUES (1,1,1,'sri','done'),(2,2,2,'good','done'),(4,17,3,'SetGeofenceParameters','{\"GFSNO\":\"#GFSNO\",\"AlertNotification\":\"#AlertNotification\",\"P3\":\"#P3\",\"P4\":\"#P4\",\"P5\":\"#P5\",\"P6\":\"#P6\",\"P7\":\"#P7\"}'),(5,18,4,'SetGeofenceParameters','{\"GFSNO\":\"#GFSNO\",\"AlertNotification\":\"#AlertNotification\",\"P3\":\"#P3\",\"P4\":\"#P4\",\"P5\":\"#P5\",\"P6\":\"#P6\",\"P7\":\"#P7\"}'),(6,19,5,'SetGeofenceParameters','{\"GFSNO\":\"#GFSNO\",\"AlertNotification\":\"#AlertNotification\",\"P3\":\"#P3\",\"P4\":\"#P4\",\"P5\":\"#P5\",\"P6\":\"#P6\",\"P7\":\"#P7\"}');
+INSERT INTO `otapcommand` VALUES (1,1,'n20','sri','done'),(2,2,'n21','good','done'),(4,17,'TAP76','SetGeofenceParameters','{\"GFSNO\":\"#GFSNO\",\"AlertNotification\":\"#AlertNotification\",\"P3\":\"#P3\",\"P4\":\"#P4\",\"P5\":\"#P5\",\"P6\":\"#P6\",\"P7\":\"#P7\"}');
 /*!40000 ALTER TABLE `otapcommand` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-27 16:13:19
+-- Dump completed on 2021-04-28 11:48:34
